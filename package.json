@@ -1,0 +1,14 @@
+{
+  "name": "kogito",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:mkraina/kogito.git",
+  "author": "Martin Kraina <kraina.martin@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^8.0.3"
+  },
+  "scripts": {
+    "prepare": "husky install"
+  }
+}
