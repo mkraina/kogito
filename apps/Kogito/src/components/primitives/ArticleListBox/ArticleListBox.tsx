@@ -1,11 +1,13 @@
 import React from 'react';
-import {Container, ContainerInner, Title} from './styles';
-import Button from '../Button';
 import LinearGradient from 'react-native-linear-gradient';
 
+import Button from '../Button';
+
+import {Container, ContainerInner, Title} from './styles';
+
 type BoxBigProps = {
-  title: string;
   buttonText: string;
+  title: string;
   onPress?: () => void;
 };
 
@@ -17,9 +19,9 @@ const ArticleListBox: React.FC<BoxBigProps> = ({
   return (
     <Container>
       <LinearGradient
+        angle={138}
         colors={['#FFCE8F', '#FFA38F']}
-        useAngle={true}
-        angle={138}>
+        useAngle={true}>
         <ContainerInner
           style={
             {
@@ -35,10 +37,10 @@ const ArticleListBox: React.FC<BoxBigProps> = ({
           {/*<Moment element={Text}>{date}</Moment>*/}
           {/*</View>*/}
           <Button
-            onPress={onPress}
+            colorVariant="red"
             title={buttonText}
-            colorVariant={'red'}
-            type={'small'}
+            type="small"
+            onPress={onPress}
           />
         </ContainerInner>
       </LinearGradient>

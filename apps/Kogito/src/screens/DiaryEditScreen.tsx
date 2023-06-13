@@ -1,17 +1,18 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {BackHandler, Platform, SafeAreaView} from 'react-native';
-import MainContainer from '../components/container/MainContainer/MainContainer';
-import MainHeader from '../components/container/MainHeader/MainHeader';
-import MainContainerWrapper from '../components/container/MainContainerWrapper';
-import Text from '../components/primitives/Text';
-import TextArea from '../components/form/TextArea';
-import {useDiaryEntry} from '../modules/diary/useDiaryEntry';
-import {RouteProp, useFocusEffect, useRoute} from '@react-navigation/native';
-import {RootStackParamList} from '../navigation/Navigation';
-import useEventListener from '../helpers/useEventListener';
+import type {RouteProp} from '@react-navigation/native';
+import {useFocusEffect, useRoute} from '@react-navigation/native';
 import moment from 'moment';
+
+import MainContainer from '../components/container/MainContainer/MainContainer';
+import MainContainerWrapper from '../components/container/MainContainerWrapper';
+import MainHeader from '../components/container/MainHeader/MainHeader';
+import TextArea from '../components/form/TextArea';
+import Text from '../components/primitives/Text';
+import useEventListener from '../helpers/useEventListener';
+import {useDiaryEntry} from '../modules/diary/useDiaryEntry';
+import type {AppScreen, RootStackParamList} from '../navigation/Navigation';
 import useMixPanelTracking from '../tracking/useMixPanelTracking';
-import type {AppScreen} from '../navigation/Navigation';
 
 export type AudioScreenProps = RouteProp<RootStackParamList, 'DiaryEdit'>;
 
@@ -41,7 +42,7 @@ const DiaryEditScreen: AppScreen<'DiaryEdit'> = ({navigation}) => {
           fireEvent('refetch-user-diary');
         }
 
-        setId(result?.data?.editDiaryEntry?.id ?? null);
+        setId(result.data?.editDiaryEntry?.id ?? null);
       } catch (e) {
         console.log(e, 'ee');
       }
@@ -93,18 +94,18 @@ const DiaryEditScreen: AppScreen<'DiaryEdit'> = ({navigation}) => {
   return (
     <SafeAreaView>
       <MainContainerWrapper>
-        <MainHeader title="Deník" beforeBackButton={handleSave} />
-        <MainContainer page={'sub'} color={'white'}>
+        <MainHeader beforeBackButton={handleSave} title="Deník" />
+        <MainContainer color="white" page="sub">
           {diaryEntry && (
-            <Text textVariant={'textMini'}>
+            <Text textVariant="textMini">
               {moment(diaryEntry.date).format('Do MMMM YYYY, HH:mm')}
             </Text>
           )}
           <TextArea
-            value={content}
             style={{
               paddingTop: 48,
             }}
+            value={content}
             onChangeText={text => setContent(text)}
           />
         </MainContainer>

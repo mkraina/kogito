@@ -1,20 +1,21 @@
 import React, {useCallback} from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
-import MainContainer from '../components/container/MainContainer/MainContainer';
-import MainHeader from '../components/container/MainHeader/MainHeader';
-import MainContainerWrapper from '../components/container/MainContainerWrapper';
-import Box from '../components/primitives/Box';
-import BoxWrapper from '../components/primitives/BoxWrapper';
-import Text from '../components/primitives/Text';
-import BoxMedia from '../components/primitives/BoxMedia';
-import {useContent} from '../modules/content/useContent';
-import {redirectItem} from '../helpers/redirectItem';
-import TabbedBox from '../components/primitives/TabbedBox';
-import Locked from '../components/primitives/Locked';
-import images from '../helpers/images';
-import useMixPanelTracking from '../tracking/useMixPanelTracking';
 import {useFocusEffect} from '@react-navigation/native';
+
+import MainContainer from '../components/container/MainContainer/MainContainer';
+import MainContainerWrapper from '../components/container/MainContainerWrapper';
+import MainHeader from '../components/container/MainHeader/MainHeader';
+import Box from '../components/primitives/Box';
+import BoxMedia from '../components/primitives/BoxMedia';
+import BoxWrapper from '../components/primitives/BoxWrapper';
+import Locked from '../components/primitives/Locked';
+import TabbedBox from '../components/primitives/TabbedBox';
+import Text from '../components/primitives/Text';
+import images from '../helpers/images';
+import {redirectItem} from '../helpers/redirectItem';
+import {useContent} from '../modules/content/useContent';
 import type {AppScreen} from '../navigation/Navigation';
+import useMixPanelTracking from '../tracking/useMixPanelTracking';
 
 const RelaxationScreen: AppScreen<'Relaxation'> = ({navigation}) => {
   const {bonusRelaxation, journeyRelaxation} = useContent();
@@ -31,25 +32,26 @@ const RelaxationScreen: AppScreen<'Relaxation'> = ({navigation}) => {
     <SafeAreaView>
       <MainContainerWrapper>
         <MainHeader />
-        <MainContainer page={'dashboard'} color={'white'}>
+        <MainContainer color="white" page="dashboard">
           <ScrollView>
             {/*<InputSearch />*/}
-            <MainContainer page={'sub'}>
-              <Text textVariant={'headerSub'}>Bonusová relaxace</Text>
+            <MainContainer page="sub">
+              <Text textVariant="headerSub">Bonusová relaxace</Text>
             </MainContainer>
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}>
               <BoxWrapper>
-                {bonusRelaxation?.map(item => (
+                {bonusRelaxation.map(item => (
                   <Box
-                    title={item.name}
+                    key={item.id}
                     img={images(
                       'bonusRelaxationOverview',
                       item.image ? item.image : null,
                     )}
                     isBonus={true}
                     isMedia={item.__typename === 'AudioItem'}
+                    title={item.name}
                     onPress={() => {
                       trackRelaxationOpened(item.name, 'Bonus');
                       redirectItem(navigation, item);
@@ -68,15 +70,16 @@ const RelaxationScreen: AppScreen<'Relaxation'> = ({navigation}) => {
                   return journeyRelaxation.unlocked ? (
                     journeyRelaxation.relaxation.map(item => (
                       <BoxMedia
-                        title={item.name}
-                        subTitle={item.subTitle}
-                        onPress={() => redirectItem(navigation, item)}
-                        isPlayable={item.__typename === 'AudioItem'}
+                        key={item.id}
                         isLocked={item.locked}
+                        isPlayable={item.__typename === 'AudioItem'}
+                        subTitle={item.subTitle}
+                        title={item.name}
+                        onPress={() => redirectItem(navigation, item)}
                       />
                     ))
                   ) : (
-                    <Locked title={'Nejprve dokončete předchozí cestu'} />
+                    <Locked title="Nejprve dokončete předchozí cestu" />
                   );
                 },
               }))}

@@ -1,6 +1,7 @@
 import React from 'react';
-import {StyledButton, ButtonInnerText} from './styles';
-import ReactNative from 'react-native';
+import type ReactNative from 'react-native';
+
+import {ButtonInnerText, StyledButton} from './styles';
 
 export type ColorVariants =
   | 'red'

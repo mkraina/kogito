@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
-import {Align} from './MainFooter';
 import {variant} from 'styled-system';
+
+import type {Align} from './MainFooter';
 
 type View = {
   align: Align;

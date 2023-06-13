@@ -1,15 +1,16 @@
 import styled from 'styled-components/native';
 import {variant} from 'styled-system';
-import {ColorVariant, TextVariant, Align, Space} from './Text';
+
+import type {Align, ColorVariant, Space, TextVariant} from './Text';
 
 type Container = {
   align: Align;
   space: Space;
 };
 type Text = {
+  add: boolean | null;
   colorVariant: ColorVariant;
   textVariant: TextVariant;
-  add: boolean | null;
 };
 
 const S = {

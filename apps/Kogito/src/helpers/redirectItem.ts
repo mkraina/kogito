@@ -1,5 +1,6 @@
-import {ContentItem} from '../modules/content/types';
-import {StackNavigationProp} from '@react-navigation/stack/src/types';
+import type {StackNavigationProp} from '@react-navigation/stack/src/types';
+
+import type {ContentItem} from '../modules/content/types';
 
 export const redirectItem = (
   navigation: StackNavigationProp<any>,

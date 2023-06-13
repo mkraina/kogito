@@ -1,25 +1,9 @@
 import React from 'react';
-import S from './styles';
-import SelectPicker, {PickerSelectProps} from 'react-native-picker-select';
 import {StyleSheet} from 'react-native';
+import type {PickerSelectProps} from 'react-native-picker-select';
+import SelectPicker from 'react-native-picker-select';
 
-const ChoiceList: React.FC<PickerSelectProps> = ({...rest}) => {
-  return (
-    <S.Container>
-      <SelectPicker
-        {...rest}
-        useNativeAndroidPickerStyle={false}
-        style={{
-          ...pickerSelectStyles,
-          iconContainer: {
-            top: 10,
-            right: 12,
-          },
-        }}
-      />
-    </S.Container>
-  );
-};
+import S from './styles';
 
 const pickerSelectStyles = StyleSheet.create({
   placeholder: {
@@ -47,5 +31,23 @@ const pickerSelectStyles = StyleSheet.create({
     paddingRight: 0, // to ensure the text is never behind the icon
   },
 });
+
+const ChoiceList: React.FC<PickerSelectProps> = ({...rest}) => {
+  return (
+    <S.Container>
+      <SelectPicker
+        {...rest}
+        style={{
+          ...pickerSelectStyles,
+          iconContainer: {
+            top: 10,
+            right: 12,
+          },
+        }}
+        useNativeAndroidPickerStyle={false}
+      />
+    </S.Container>
+  );
+};
 
 export default ChoiceList;

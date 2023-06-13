@@ -1,10 +1,11 @@
 import styled from 'styled-components/native';
 import {variant} from 'styled-system';
-import {ProgressBarVariants} from './ProgressBar';
+
+import type {ProgressBarVariants} from './ProgressBar';
 
 type ProgressLine = {
-  value: number;
   progressBarVariants: ProgressBarVariants;
+  value: number;
 };
 
 export const Wrapper = styled.View`

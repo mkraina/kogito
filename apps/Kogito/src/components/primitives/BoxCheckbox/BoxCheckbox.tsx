@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
-import S from './styles';
-import Icon from '../../../assets/icon-check.svg';
 import {TouchableWithoutFeedback} from 'react-native';
+
+import Icon from '../../../assets/icon-check.svg';
+
+import S from './styles';
 
 type ContainerProps = {
   checked?: boolean;
-  title?: string;
   onChange?: (value: boolean) => void;
   onLongPress?: () => void;
+  title?: string;
 };
 
 const BoxCheckbox: React.FC<ContainerProps> = ({

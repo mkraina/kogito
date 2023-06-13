@@ -1,5 +1,6 @@
 import {gql, useQuery} from '@apollo/client';
-import {
+
+import type {
   QuestionnaireDetailQuery,
   QuestionnaireDetailQueryVariables,
 } from '../../../gql/__generated__/graphql';

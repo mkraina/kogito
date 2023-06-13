@@ -1,20 +1,21 @@
 import React, {useCallback, useState} from 'react';
 import {Image} from 'react-native';
+import {getReadableVersion} from 'react-native-device-info';
+import {useApolloClient} from '@apollo/client';
 import {useNavigation} from '@react-navigation/native';
-import Button from '../components/primitives/Button';
-import Text from '../components/primitives/Text';
+import styled from 'styled-components/native';
+
+import GirlImage from '../assets/girl-isolated.svg';
+import LogoFooter from '../assets/login-logo-footer.svg';
+import Logo from '../assets/logo.png';
 import HalfOverlay from '../components/container/HalfOverlay';
 import MainContainer from '../components/container/MainContainer';
-import GirlImage from '../assets/girl-isolated.svg';
-import Logo from '../assets/logo.png';
-import LogoFooter from '../assets/login-logo-footer.svg';
-import styled from 'styled-components/native';
-import LoginForm from '../modules/auth/form/LoginForm';
-import {useApolloClient} from '@apollo/client';
 import MainContainerWrapper from '../components/container/MainContainerWrapper';
+import Button from '../components/primitives/Button';
 import ColoredSafeAreaView from '../components/primitives/ColoredSafeAreaView';
-import {getReadableVersion} from 'react-native-device-info';
+import Text from '../components/primitives/Text';
 import {ENV} from '../env';
+import LoginForm from '../modules/auth/form/LoginForm';
 
 export const LogoFooterWrapper = styled.View`
   margin-top: auto;
@@ -60,24 +61,24 @@ const LoginScreen: React.FC = () => {
             onPress={() => setState('login')}
           />
           <Button
-            title="Registrovat"
             colorVariant="white"
-            onPress={() => setState('registration')}
             style={{
               marginTop: 14,
             }}
+            title="Registrovat"
+            onPress={() => setState('registration')}
           />
           <LogoFooterWrapper>
             <LogoFooter />
-            <Text textVariant="textCopy" align={'center'}>
+            <Text align="center" textVariant="textCopy">
               {ENV.MODE[0]}
               {getReadableVersion()}
             </Text>
           </LogoFooterWrapper>
           {/*</ScrollView>*/}
           <HalfOverlay
-            visible={state !== 'normal'}
-            close={() => setState('normal')}>
+            close={() => setState('normal')}
+            visible={state !== 'normal'}>
             {(state === 'login' || state === 'registration') && (
               <LoginForm type={state} onSuccess={loginSuccess} />
             )}

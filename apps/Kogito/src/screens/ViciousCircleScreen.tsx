@@ -1,19 +1,19 @@
 import React, {useEffect, useMemo} from 'react';
-
 import {SafeAreaView, ScrollView} from 'react-native';
-import MainContainerWrapper from '../components/container/MainContainerWrapper/MainContainerWrapper';
-import MainHeader from '../components/container/MainHeader/MainHeader';
-import Text from '../components/primitives/Text';
-import {useViciousCircleList} from '../modules/diary/useViciousCircleList';
 import {capitalize, groupBy} from 'lodash';
 import moment from 'moment';
-import DayInfoBox from '../components/primitives/DayInfoBox';
 
+import MainContainerWrapper from '../components/container/MainContainerWrapper/MainContainerWrapper';
+import MainHeader from '../components/container/MainHeader/MainHeader';
+import DayInfoBox from '../components/primitives/DayInfoBox';
+import Text from '../components/primitives/Text';
 import {useTrackSchedule} from '../modules/content/useTrackSchedule';
+import {useViciousCircleList} from '../modules/diary/useViciousCircleList';
 import type {AppScreen} from '../navigation/Navigation';
 
 const ViciousCircleScreen: AppScreen<'ViciousCircle'> = ({navigation}) => {
   const {records, refetch} = useViciousCircleList();
+  // eslint-disable-next-line no-empty-pattern
   const {} = useTrackSchedule();
 
   const groupedRecords = useMemo(() => {
@@ -47,20 +47,17 @@ const ViciousCircleScreen: AppScreen<'ViciousCircle'> = ({navigation}) => {
         <MainHeader />
         <ScrollView>
           <Text
-            textVariant={'bigHeader'}
+            space="main"
+            textVariant="bigHeader"
             onPressPlus={() =>
               navigation.navigate('ViciousCircleEdit', {id: null})
-            }
-            space={'main'}>
+            }>
             Kruhy
           </Text>
 
           {groupedRecords.map(item => (
-            <>
-              <Text
-                textVariant={'headerSub2'}
-                colorVariant={'gray'}
-                space={'main'}>
+            <React.Fragment key={item.title}>
+              <Text colorVariant="gray" space="main" textVariant="headerSub2">
                 {item.title}
               </Text>
               {item.items.map(entry => {
@@ -68,15 +65,16 @@ const ViciousCircleScreen: AppScreen<'ViciousCircle'> = ({navigation}) => {
                 const date = new Date(entry.date);
                 return (
                   <DayInfoBox
+                    key={entry.id}
                     date={date}
-                    title={'Title'}
+                    title="Title"
                     onPress={() =>
                       navigation.navigate('ViciousCircleEdit', {id: entry.id})
                     }
                   />
                 );
               })}
-            </>
+            </React.Fragment>
           ))}
         </ScrollView>
       </MainContainerWrapper>

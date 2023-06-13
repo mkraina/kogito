@@ -1,14 +1,17 @@
+/* eslint-disable max-len */
 import React, {useEffect, useState} from 'react';
 import {ScrollView} from 'react-native';
-import {useRegistrationStatus} from '../modules/user/useRegistrationStatus';
 import HTML from 'react-native-render-html';
-import Button from '../components/primitives/Button';
-import MainContainer from '../components/container/MainContainer';
+
 import RegisterImg from '../assets/register-img.svg';
-import {RegisterImgWrapper} from './RegisterScreen';
-import Text from '../components/primitives/Text';
+import MainContainer from '../components/container/MainContainer';
+import Button from '../components/primitives/Button';
 import ColoredSafeAreaView from '../components/primitives/ColoredSafeAreaView';
+import Text from '../components/primitives/Text';
+import {useRegistrationStatus} from '../modules/user/useRegistrationStatus';
 import type {AppScreen} from '../navigation/Navigation';
+
+import {RegisterImgWrapper} from './RegisterScreen';
 
 const styles = {
   p: {
@@ -134,7 +137,6 @@ const QuestionnaireResultScreen: AppScreen<'QuestionnaireResultScreen'> = ({
 
   const handlePress = async () => {
     if (status) {
-      // @ts-ignore
       if (resultTexts[status.group][status.userLabel].length - 1 > page) {
         setPage(page + 1);
       } else if (status.group === 'normal') {
@@ -169,7 +171,6 @@ const QuestionnaireResultScreen: AppScreen<'QuestionnaireResultScreen'> = ({
 
           {showButton && (
             <Button
-              // @ts-ignore
               title={resultTexts[status.group][status.userLabel][page].button}
               onPress={handlePress}
             />

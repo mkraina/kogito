@@ -1,7 +1,9 @@
 import React from 'react';
-import {StyledButton, Text} from './styles';
-import ReactNative from 'react-native';
+import type ReactNative from 'react-native';
+
 import IconCoin from '../../../assets/icon-coin.svg';
+
+import {StyledButton, Text} from './styles';
 
 type ButtonProps = {
   title: string;

@@ -1,16 +1,17 @@
 import React, {useCallback} from 'react';
 import {ScrollView, View} from 'react-native';
-import MainContainer from '../components/container/MainContainer';
-import Text from '../components/primitives/Text';
-import QuestionnaireWidget from '../modules/questionnaire/components/QuestionnaireWidget';
 import {useFocusEffect} from '@react-navigation/native';
-import Button from '../components/primitives/Button';
+
+import MainContainer from '../components/container/MainContainer';
 import MainContainerWrapper from '../components/container/MainContainerWrapper';
-import {useMeQuery} from '../modules/user/useMeQuery';
-import {useAfterMonthQuestionnaireQuery} from '../modules/questionnaire/useAfterMonthQuestionnaireQuery';
-import {useSelectJourney} from '../modules/content/useSelectJourney';
+import Button from '../components/primitives/Button';
 import ColoredSafeAreaView from '../components/primitives/ColoredSafeAreaView';
-import {AppScreen} from '../navigation/Navigation';
+import Text from '../components/primitives/Text';
+import {useSelectJourney} from '../modules/content/useSelectJourney';
+import QuestionnaireWidget from '../modules/questionnaire/components/QuestionnaireWidget';
+import {useAfterMonthQuestionnaireQuery} from '../modules/questionnaire/useAfterMonthQuestionnaireQuery';
+import {useMeQuery} from '../modules/user/useMeQuery';
+import type {AppScreen} from '../navigation/Navigation';
 
 const AfterMonthQuestionnaireScreen: AppScreen<'AfterMonthQuestionnaire'> = ({
   navigation,
@@ -18,6 +19,7 @@ const AfterMonthQuestionnaireScreen: AppScreen<'AfterMonthQuestionnaire'> = ({
   const {haveToChooseJourney, questionnaire, loading, refetch} =
     useAfterMonthQuestionnaireQuery();
   const {selectJourneyMutation} = useSelectJourney();
+  // eslint-disable-next-line no-empty-pattern
   const {} = useMeQuery();
 
   useFocusEffect(
@@ -31,7 +33,7 @@ const AfterMonthQuestionnaireScreen: AppScreen<'AfterMonthQuestionnaire'> = ({
   }
 
   const allFinished =
-    questionnaire?.questionnaires?.filter(item => !item.finished).length === 0;
+    questionnaire?.questionnaires.filter(item => !item.finished).length === 0;
 
   const handlePress = async () => {
     if (haveToChooseJourney) {
@@ -78,25 +80,25 @@ const AfterMonthQuestionnaireScreen: AppScreen<'AfterMonthQuestionnaire'> = ({
                 questionnaire.questionnaires.map(item => (
                   <QuestionnaireWidget
                     key={item.id}
+                    count={item.questionnaire.questionCount}
+                    finished={item.finished}
+                    name={item.questionnaire.name}
                     press={() =>
                       !item.finished &&
                       navigation.navigate('AfterMonthQuestionnaireDetail', {
                         id: item.id,
                       })
                     }
-                    name={item.questionnaire.name}
-                    finished={item.finished}
-                    count={item.questionnaire.questionCount}
                   />
                 ))}
             </View>
             {allFinished && (
               <Button
-                title="Dokončit"
-                onPress={handlePress}
                 style={{
                   marginTop: 14,
                 }}
+                title="Dokončit"
+                onPress={handlePress}
               />
             )}
           </MainContainer>

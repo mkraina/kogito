@@ -1,19 +1,20 @@
 import React, {useEffect, useState} from 'react';
+import {Controller, useForm} from 'react-hook-form';
 import {ToastAndroid, View} from 'react-native';
-import {useForm, Controller} from 'react-hook-form';
-import Text from '../../../components/primitives/Text';
+
+import type {LoginInput} from '../../../../gql/__generated__/graphql';
 import TextInput from '../../../components/form/TextInput';
-import Button from '../../../components/primitives/Button';
-import {useAuth} from '../useAuth';
 import {ValidationMessage} from '../../../components/form/ValidationMessage';
-import {useLogin} from '../useLogin';
+import Button from '../../../components/primitives/Button';
+import Text from '../../../components/primitives/Text';
 import {PHONE_NUMBER_REGEX} from '../../../helpers/regexp';
 import useMixPanelTracking from '../../../tracking/useMixPanelTracking';
-import {LoginInput} from '../../../../gql/__generated__/graphql';
+import {useAuth} from '../useAuth';
+import {useLogin} from '../useLogin';
 
 type LoginForm = {
-  type: 'login' | 'registration';
   onSuccess: () => void;
+  type: 'login' | 'registration';
 };
 
 const LoginForm: React.FC<LoginForm> = ({type, onSuccess}) => {
@@ -40,7 +41,7 @@ const LoginForm: React.FC<LoginForm> = ({type, onSuccess}) => {
         const result = await initializeLoginMutation({
           variables: {
             input: {
-              phoneNumber: phoneNumber,
+              phoneNumber,
             },
           },
         });
@@ -93,35 +94,35 @@ const LoginForm: React.FC<LoginForm> = ({type, onSuccess}) => {
       </View>
       <Controller
         control={control}
+        defaultValue=""
+        name="phoneNumber"
         render={({field: {onChange, onBlur, value}}) => (
           <TextInput
             placeholder="Telefonní číslo"
+            value={value}
             onBlur={onBlur}
             onChangeText={value => onChange(value)}
             onTouchStart={() => setError(null)}
-            value={value}
           />
         )}
-        name="phoneNumber"
         rules={{required: true}}
-        defaultValue=""
       />
       <Controller
         control={control}
+        defaultValue=""
+        name="password"
         render={({field: {onChange, onBlur, value}}) => (
           <TextInput
+            placeholder={useMasked ? 'Heslo / SMS Kód' : 'SMS Kód'}
             secureTextEntry={useMasked}
             style={{marginTop: 16, marginBottom: 24}}
-            placeholder={useMasked ? 'Heslo / SMS Kód' : 'SMS Kód'}
+            value={value}
             onBlur={onBlur}
             onChangeText={value => onChange(value)}
             onTouchStart={() => setError(null)}
-            value={value}
           />
         )}
-        name="password"
         rules={{required: true}}
-        defaultValue=""
       />
       {error && (
         <ValidationMessage style={{marginBottom: 24}}>
@@ -129,9 +130,9 @@ const LoginForm: React.FC<LoginForm> = ({type, onSuccess}) => {
         </ValidationMessage>
       )}
       <Button
+        style={{marginBottom: 24}}
         title="Přihlásit se"
         onPress={handleSubmit(onSubmit)}
-        style={{marginBottom: 24}}
       />
     </View>
   );

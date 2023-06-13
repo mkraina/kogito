@@ -1,14 +1,16 @@
 import React from 'react';
-import {Container, ContainerInner, Title, Text} from './styles';
-import Button from '../Button';
-import Woman from '../../../assets/woman-2.svg';
-import {View} from 'react-native';
 import Moment from 'react-moment';
+import {View} from 'react-native';
+
+import Woman from '../../../assets/woman-2.svg';
+import Button from '../Button';
+
+import {Container, ContainerInner, Text, Title} from './styles';
 
 type BoxBigProps = {
-  title: string;
   buttonText: string;
   date: Date;
+  title: string;
   onPress?: () => void;
 };
 
@@ -33,10 +35,10 @@ const BoxBig: React.FC<BoxBigProps> = ({
         <Moment element={Text}>{date}</Moment>
         <View>
           <Button
-            onPress={onPress}
+            colorVariant="red"
             title={buttonText}
-            colorVariant={'red'}
-            type={'small'}
+            type="small"
+            onPress={onPress}
           />
         </View>
       </ContainerInner>

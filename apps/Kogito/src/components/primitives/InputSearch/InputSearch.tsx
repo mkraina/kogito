@@ -1,12 +1,12 @@
 import React from 'react';
+
 import IconSearch from '../../../assets/icon-search.svg';
+
 import S from './styles';
 
-type ContainerProps = {};
-
-const InputSearch: React.FC<ContainerProps> = ({...rest}) => {
+const InputSearch: React.FC = () => {
   return (
-    <S.Container {...rest}>
+    <S.Container>
       <S.Wrapper>
         <IconSearch />
         <S.TextInput

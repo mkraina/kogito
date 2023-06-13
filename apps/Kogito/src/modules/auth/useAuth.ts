@@ -1,7 +1,8 @@
-import {useAuthContext} from './auth-context';
 import {useCallback} from 'react';
-import {finishAuthenticating, reset} from './auth-reducer';
+
 import {removeTokens, saveTokens} from './api';
+import {useAuthContext} from './auth-context';
+import {finishAuthenticating, reset} from './auth-reducer';
 
 export const useAuth = () => {
   const {state, dispatch} = useAuthContext();

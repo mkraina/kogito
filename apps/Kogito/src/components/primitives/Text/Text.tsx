@@ -1,7 +1,10 @@
 import React from 'react';
-import ReactNative, {TouchableOpacity} from 'react-native';
-import S from './styles';
+import type ReactNative from 'react-native';
+import {TouchableOpacity} from 'react-native';
+
 import IconPlus from '../../../assets/icon-plus.svg';
+
+import S from './styles';
 
 export type TextVariant =
   | 'bigHeader'
@@ -20,13 +23,13 @@ export type Align = 'right' | 'center' | 'left' | null;
 export type Space = 'main' | 'mainY' | null;
 
 type TextProps = {
-  textVariant?: TextVariant;
-  colorVariant?: ColorVariant;
-  align?: Align;
   add?: boolean;
+  align?: Align;
+  colorVariant?: ColorVariant;
   goTo?: string;
-  space?: Space;
   onPressPlus?: () => void;
+  space?: Space;
+  textVariant?: TextVariant;
 } & ReactNative.TextProps;
 
 const Text: React.FC<TextProps> = ({
@@ -40,19 +43,19 @@ const Text: React.FC<TextProps> = ({
   ...rest
 }) => {
   return (
-    <S.Container space={space} align={align} {...rest}>
+    <S.Container align={align} space={space} {...rest}>
       <S.StyledText
-        textVariant={textVariant}
+        add={add}
         colorVariant={colorVariant}
-        add={add}>
+        textVariant={textVariant}>
         {children}
       </S.StyledText>
       {onPressPlus && (
         <TouchableOpacity
-          onPress={onPressPlus}
           style={{
             padding: 15,
-          }}>
+          }}
+          onPress={onPressPlus}>
           <IconPlus />
         </TouchableOpacity>
       )}

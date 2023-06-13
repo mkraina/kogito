@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import {variant} from 'styled-system';
-import {LevelWidgetVariant} from './LevelWidget';
+
+import type {LevelWidgetVariant} from './LevelWidget';
 
 const S = {
   Container: styled.TouchableOpacity``,

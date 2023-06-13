@@ -1,14 +1,15 @@
 /* eslint-disable no-lone-blocks */
 import React, {useCallback} from 'react';
-import ColoredSafeAreaView from '../components/primitives/ColoredSafeAreaView';
-import MainContainerWrapper from '../components/container/MainContainerWrapper';
-import {useRegistrationStatus} from '../modules/user/useRegistrationStatus';
-import BoxJourney from '../components/primitives/BoxJourney';
-import {useSwitchJourney} from '../modules/content/useSwitchJourney';
-import styled from 'styled-components/native';
 import {useFocusEffect} from '@react-navigation/native';
-import useMixPanelTracking from '../tracking/useMixPanelTracking';
+import styled from 'styled-components/native';
+
+import MainContainerWrapper from '../components/container/MainContainerWrapper';
+import BoxJourney from '../components/primitives/BoxJourney';
+import ColoredSafeAreaView from '../components/primitives/ColoredSafeAreaView';
+import {useSwitchJourney} from '../modules/content/useSwitchJourney';
+import {useRegistrationStatus} from '../modules/user/useRegistrationStatus';
 import type {AppScreen} from '../navigation/Navigation';
+import useMixPanelTracking from '../tracking/useMixPanelTracking';
 
 const S = {
   HeadlineContainer: styled.View`
@@ -84,7 +85,7 @@ const JourneySwitchScreen: AppScreen<'JourneySwitch'> = ({navigation}) => {
   );
 
   return (
-    <ColoredSafeAreaView color1="#FFCE8F" color2="#FFA38F" angle={138}>
+    <ColoredSafeAreaView angle={138} color1="#FFCE8F" color2="#FFA38F">
       <MainContainerWrapper>
         <S.HeadlineContainer>
           <S.Headline>Vyberte jednu z cest</S.Headline>
@@ -94,10 +95,11 @@ const JourneySwitchScreen: AppScreen<'JourneySwitch'> = ({navigation}) => {
             (textData, index) =>
               textData && (
                 <BoxJourney
-                  index={index + 1}
-                  title={textData.name}
+                  key={textData.id}
                   description={textData.description}
                   highlighted={index === 0}
+                  index={index + 1}
+                  title={textData.name}
                   onClick={() => {
                     trackSwitchJourney(textData.id);
                     switchJourneyMutation({

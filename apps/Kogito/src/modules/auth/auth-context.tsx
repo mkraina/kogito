@@ -1,21 +1,19 @@
+import type {Dispatch} from 'react';
 import React, {
   createContext,
-  Dispatch,
-  PropsWithChildren,
   useContext,
   useEffect,
   useReducer,
   useState,
 } from 'react';
-import AuthReducer, {
-  AuthAction,
-  AuthState,
-  finishAuthenticating,
-} from './auth-reducer';
+
 import ApolloClient from '../../apollo/client';
-import {getAccessToken} from './api';
 import useMixPanelTracking from '../../tracking/useMixPanelTracking';
 import {MeQuery} from '../user/useMeQuery';
+
+import {getAccessToken} from './api';
+import type {AuthAction, AuthState} from './auth-reducer';
+import AuthReducer, {finishAuthenticating} from './auth-reducer';
 
 const initState = {
   accessToken: null,
@@ -24,8 +22,8 @@ const initState = {
 } as AuthState;
 
 type AuthContextState = {
-  state: AuthState;
   dispatch: Dispatch<AuthAction>;
+  state: AuthState;
 };
 
 const AuthContext = createContext<AuthContextState>({
@@ -35,12 +33,17 @@ const AuthContext = createContext<AuthContextState>({
 
 const useAuthContext = (): AuthContextState => useContext(AuthContext);
 
-const AuthProvider: React.FC<PropsWithChildren> = ({children}) => {
+const AuthProvider: React.FC<React.PropsWithChildren> = ({children}) => {
   const {identifyUser} = useMixPanelTracking();
   const [state, dispatch] = useReducer<React.Reducer<AuthState, AuthAction>>(
     AuthReducer,
     initState,
   );
+
+  const [contextValue, setContextValue] = useState<AuthContextState>({
+    state,
+    dispatch,
+  });
 
   // Update context value and trigger re-render
   // This patterns avoids unnecessary deep renders
@@ -53,9 +56,9 @@ const AuthProvider: React.FC<PropsWithChildren> = ({children}) => {
   }, [state]);
 
   useEffect(() => {
-    (async function load(): Promise<void> {
+    (async (): Promise<void> => {
       try {
-        let accessToken = await getAccessToken();
+        const accessToken = await getAccessToken();
 
         if (accessToken) {
           const result = await ApolloClient.query({
@@ -79,11 +82,6 @@ const AuthProvider: React.FC<PropsWithChildren> = ({children}) => {
       }
     })();
   }, []);
-
-  const [contextValue, setContextValue] = useState<AuthContextState>({
-    state,
-    dispatch,
-  });
 
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>

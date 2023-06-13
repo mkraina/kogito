@@ -1,95 +1,92 @@
 import React from 'react';
-import {StackScreenProps, createStackNavigator} from '@react-navigation/stack';
-import {
-  BottomTabScreenProps,
-  createBottomTabNavigator,
-} from '@react-navigation/bottom-tabs';
-import LoginScreen from '../screens/LoginScreen';
-import AvailableQuestionnairesScreen from '../screens/AvailableQuestionnairesScreen';
-import QuestionnaireScreen from '../screens/QuestionnaireScreen';
-import RegisterScreen from '../screens/RegisterScreen';
-import DashboardScreen from '../screens/DashboardScreen';
-import RelaxationScreen from '../screens/RelaxationScreen';
-import AudioScreen from '../screens/AudioScreen';
-import JourneyProgressScreen from '../screens/JourneyProgressScreen';
-import JourneyScreen from '../screens/JourneyScreen';
-import FinishRegistrationScreen from '../screens/FinishRegistrationScreen';
-import SplashScreen from '../screens/SplashScreen';
-import ProfileSettingsScreen from '../screens/ProfileSettingsScreen';
-import LogoutScreen from '../screens/LogoutScreen';
-import StoriesListScreen from '../screens/StoriesListScreen';
-import StoryDetailScreen from '../screens/StoryDetailScreen';
-import ArticleScreen from '../screens/ArticleScreen';
-import DiaryScreen from '../screens/DiaryScreen';
-import DiaryEditScreen from '../screens/DiaryEditScreen';
-import MoodListScreen from '../screens/MoodListScreen';
-import ScheduleDayScreen from '../screens/ScheduleDayScreen';
-import ViciousCircleScreen from '../screens/ViciousCircleScreen';
-import ViciousCircleEditScreen from '../screens/ViciousCircleEditScreen';
-import QuestionnaireResultScreen from '../screens/QuestionnaireResultScreen';
-import SelectJourneyScreen from '../screens/SelectJourneyScreen';
-import VideoScreen from '../screens/VideoScreen';
-import TodosScreen from '../screens/TodosScreen';
-import AfterMonthQuestionnaireScreen from '../screens/AfterMonthQuestionnaireScreen';
-import AfterMonthQuestionnaireDetailScreen from '../screens/AfterMonthQuestionnaireDetailScreen';
-import JourneySwitchScreen from '../screens/JourneySwitchScreen';
+import type {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import type {StackScreenProps} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 
 import IconMyDay from '../assets/icon-my-day.svg';
 import IconRoad from '../assets/icon-road.svg';
 import IconSun from '../assets/icon-sun.svg';
 import IconTodo from '../assets/icon-todo.svg';
+import AfterMonthQuestionnaireDetailScreen from '../screens/AfterMonthQuestionnaireDetailScreen';
+import AfterMonthQuestionnaireScreen from '../screens/AfterMonthQuestionnaireScreen';
+import ArticleScreen from '../screens/ArticleScreen';
+import AudioScreen from '../screens/AudioScreen';
+import AvailableQuestionnairesScreen from '../screens/AvailableQuestionnairesScreen';
+import DashboardScreen from '../screens/DashboardScreen';
+import DiaryEditScreen from '../screens/DiaryEditScreen';
+import DiaryScreen from '../screens/DiaryScreen';
+import FinishRegistrationScreen from '../screens/FinishRegistrationScreen';
+import JourneyProgressScreen from '../screens/JourneyProgressScreen';
+import JourneyScreen from '../screens/JourneyScreen';
+import JourneySwitchScreen from '../screens/JourneySwitchScreen';
+import LoginScreen from '../screens/LoginScreen';
+import LogoutScreen from '../screens/LogoutScreen';
+import MoodListScreen from '../screens/MoodListScreen';
+import ProfileSettingsScreen from '../screens/ProfileSettingsScreen';
+import QuestionnaireResultScreen from '../screens/QuestionnaireResultScreen';
+import QuestionnaireScreen from '../screens/QuestionnaireScreen';
+import RegisterScreen from '../screens/RegisterScreen';
+import RelaxationScreen from '../screens/RelaxationScreen';
+import ScheduleDayScreen from '../screens/ScheduleDayScreen';
+import SelectJourneyScreen from '../screens/SelectJourneyScreen';
+import SplashScreen from '../screens/SplashScreen';
+import StoriesListScreen from '../screens/StoriesListScreen';
+import StoryDetailScreen from '../screens/StoryDetailScreen';
 import TermsScreen from '../screens/TermsScreen';
+import TodosScreen from '../screens/TodosScreen';
+import ViciousCircleEditScreen from '../screens/ViciousCircleEditScreen';
+import ViciousCircleScreen from '../screens/ViciousCircleScreen';
+import VideoScreen from '../screens/VideoScreen';
 
 export type RootStackParamList = {
-  Splash: undefined;
-  Terms: undefined;
-  Signpost: undefined;
-  Login: undefined;
-  Registration: undefined;
-  Dashboard: undefined;
-  ProfileSettings: undefined;
-  Audio: {id: string};
-  Video: {id: string};
-  Article: {id: string};
-  StoriesList: undefined;
-  StoryDetail: {id: string};
-
-  Diary: undefined;
-  DiaryEdit: {id: string | null};
-
-  MoodList: undefined;
-
-  ViciousCircle: undefined;
-  ViciousCircleEdit: {id: string | null};
-
-  ScheduleDay: undefined;
-
-  Todos: undefined;
-
   AfterMonthQuestionnaire: undefined;
   AfterMonthQuestionnaireDetail: {id: string};
+  Article: {id: string};
+  Audio: {id: string};
+  Dashboard: undefined;
+  Diary: undefined;
+  DiaryEdit: {id: string | null};
+  JourneySwitch: undefined;
+  Login: undefined;
+  Logout: undefined;
+  MoodList: undefined;
+  ProfileSettings: undefined;
+
+  Registration: undefined;
+  ScheduleDay: undefined;
+
   SelectJourneyScreen: undefined;
 
-  JourneySwitch: undefined;
+  Signpost: undefined;
+  Splash: undefined;
 
-  Logout: undefined;
+  StoriesList: undefined;
+
+  StoryDetail: {id: string};
+
+  Terms: undefined;
+  Todos: undefined;
+  ViciousCircle: undefined;
+
+  ViciousCircleEdit: {id: string | null};
+
+  Video: {id: string};
 };
 
 export type RegistrationStackParamList = {
-  Register: undefined;
   AvailableQuestionnaires: undefined;
-  QuestionnaireResultScreen: undefined;
   FinishRegistrationScreen: undefined;
-  SelectJourneyScreen: undefined;
+  QuestionnaireResultScreen: undefined;
   QuestionnaireScreen: {id: string};
+  Register: undefined;
+  SelectJourneyScreen: undefined;
 };
 
 export type DashboardStackParamList = {
-  MyDay: undefined;
   Journey: {id: string; level: number};
+  MyDay: undefined;
 };
-
-export type StoriesStackParamList = {};
 
 type DashboardTabParamList = Record<
   'DashboardTab' | 'JourneyProgress' | 'Relaxation' | 'Todos',
@@ -97,11 +94,11 @@ type DashboardTabParamList = Record<
 >;
 //TODO: is it actually used?
 type UnusedScreensParamList = {
+  RelaxationLocked: undefined;
   RoadPhase: undefined;
-  RoadTools: undefined;
   RoadRelaxation: undefined;
   RoadTodos: undefined;
-  RelaxationLocked: undefined;
+  RoadTools: undefined;
 };
 export type AppParamList = DashboardStackParamList &
   RegistrationStackParamList &
@@ -119,7 +116,9 @@ export type AppScreen<T extends AppScreenName> = React.FC<
 >;
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace ReactNavigation {
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface RootParamList extends AppParamList {}
   }
 }
@@ -132,33 +131,33 @@ const UnfinishedRegistrationScreens: React.FC = () => {
   return (
     <RegistrationStack.Navigator initialRouteName="Register">
       <RegistrationStack.Screen
-        name="Register"
         component={RegisterScreen}
+        name="Register"
         options={{headerShown: false}}
       />
       <RegistrationStack.Screen
-        name="AvailableQuestionnaires"
         component={AvailableQuestionnairesScreen}
+        name="AvailableQuestionnaires"
         options={{headerShown: false}}
       />
       <RegistrationStack.Screen
-        name="QuestionnaireScreen"
         component={QuestionnaireScreen}
+        name="QuestionnaireScreen"
         options={{headerShown: false}}
       />
       <RegistrationStack.Screen
-        name="QuestionnaireResultScreen"
         component={QuestionnaireResultScreen}
+        name="QuestionnaireResultScreen"
         options={{headerShown: false}}
       />
       <RegistrationStack.Screen
-        name="SelectJourneyScreen"
         component={SelectJourneyScreen}
+        name="SelectJourneyScreen"
         options={{headerShown: false}}
       />
       <RegistrationStack.Screen
-        name="FinishRegistrationScreen"
         component={FinishRegistrationScreen}
+        name="FinishRegistrationScreen"
         options={{headerShown: false}}
       />
     </RegistrationStack.Navigator>
@@ -169,13 +168,13 @@ const DashboardScreens: React.FC = () => {
   return (
     <DashboardStack.Navigator initialRouteName="MyDay">
       <DashboardStack.Screen
-        name="MyDay"
         component={DashboardScreen}
+        name="MyDay"
         options={{headerShown: false}}
       />
       <DashboardStack.Screen
-        name="Journey"
         component={JourneyScreen}
+        name="Journey"
         options={{headerShown: false}}
       />
     </DashboardStack.Navigator>
@@ -207,23 +206,23 @@ const DashboardTabNavigation = () => {
         },
       })}>
       <Tab.Screen
-        name="DashboardTab"
         component={DashboardScreens}
+        name="DashboardTab"
         options={{title: 'Můj den'}}
       />
       <Tab.Screen
-        name="JourneyProgress"
         component={JourneyProgressScreen}
+        name="JourneyProgress"
         options={{title: 'Cesta'}}
       />
       <Tab.Screen
-        name="Relaxation"
         component={RelaxationScreen}
+        name="Relaxation"
         options={{title: 'Relaxace'}}
       />
       <Tab.Screen
-        name="Todos"
         component={TodosScreen}
+        name="Todos"
         options={{title: 'Plánovač'}}
       />
     </Tab.Navigator>
@@ -234,113 +233,113 @@ const Navigation: React.FC = () => {
   return (
     <Stack.Navigator initialRouteName="Splash">
       <Stack.Screen
-        name="Splash"
         component={SplashScreen}
+        name="Splash"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="Terms"
         component={TermsScreen}
+        name="Terms"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="Login"
         component={LoginScreen}
+        name="Login"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="Registration"
         component={UnfinishedRegistrationScreens}
+        name="Registration"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="Dashboard"
         component={DashboardTabNavigation}
+        name="Dashboard"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="ProfileSettings"
         component={ProfileSettingsScreen}
+        name="ProfileSettings"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="Audio"
         component={AudioScreen}
+        name="Audio"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="Video"
         component={VideoScreen}
+        name="Video"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="Article"
         component={ArticleScreen}
+        name="Article"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="StoriesList"
         component={StoriesListScreen}
+        name="StoriesList"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="StoryDetail"
         component={StoryDetailScreen}
+        name="StoryDetail"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="Diary"
         component={DiaryScreen}
+        name="Diary"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="DiaryEdit"
         component={DiaryEditScreen}
+        name="DiaryEdit"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="MoodList"
         component={MoodListScreen}
+        name="MoodList"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="ViciousCircle"
         component={ViciousCircleScreen}
+        name="ViciousCircle"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="ViciousCircleEdit"
         component={ViciousCircleEditScreen}
+        name="ViciousCircleEdit"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="ScheduleDay"
         component={ScheduleDayScreen}
+        name="ScheduleDay"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AfterMonthQuestionnaire"
         component={AfterMonthQuestionnaireScreen}
+        name="AfterMonthQuestionnaire"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AfterMonthQuestionnaireDetail"
         component={AfterMonthQuestionnaireDetailScreen}
+        name="AfterMonthQuestionnaireDetail"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="SelectJourneyScreen"
         component={SelectJourneyScreen}
+        name="SelectJourneyScreen"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="JourneySwitch"
         component={JourneySwitchScreen}
+        name="JourneySwitch"
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="Logout"
         component={LogoutScreen}
+        name="Logout"
         options={{headerShown: false}}
       />
     </Stack.Navigator>

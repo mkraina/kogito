@@ -5,19 +5,20 @@ import {
   ScrollView,
   useWindowDimensions,
 } from 'react-native';
-import {RouteProp, useFocusEffect} from '@react-navigation/native';
-import {RootStackParamList} from '../navigation/Navigation';
-import {useViciousCircle} from '../modules/diary/useViciousCircle';
-import ViciousCircle from '../components/primitives/ViciousCircle/VicousCircle';
-import EditViciousCircleModal from '../modules/diary/modal/EditViciousCircleModal';
+import type {RouteProp} from '@react-navigation/native';
+import {useFocusEffect} from '@react-navigation/native';
+import moment from 'moment';
+
+import MainContainer from '../components/container/MainContainer';
 import MainContainerWrapper from '../components/container/MainContainerWrapper';
 import MainHeader from '../components/container/MainHeader';
-import MainContainer from '../components/container/MainContainer';
 import Text from '../components/primitives/Text';
+import ViciousCircle from '../components/primitives/ViciousCircle/VicousCircle';
 import DetailViciousCircleModal from '../modules/diary/modal/DetailViciousCircleModal';
-import moment from 'moment';
+import EditViciousCircleModal from '../modules/diary/modal/EditViciousCircleModal';
+import {useViciousCircle} from '../modules/diary/useViciousCircle';
+import type {AppScreen, RootStackParamList} from '../navigation/Navigation';
 import useMixPanelTracking from '../tracking/useMixPanelTracking';
-import type {AppScreen} from '../navigation/Navigation';
 
 export type ViciousCircleEditProps = RouteProp<
   RootStackParamList,
@@ -55,7 +56,7 @@ const modalText = (part: Parts) =>
     behaviour: 'Zapsat chování',
   }[part]);
 
-const ViciousCircleEditScreen: AppScreen<'ViciousCircleEdit'> = ({}) => {
+const ViciousCircleEditScreen: AppScreen<'ViciousCircleEdit'> = () => {
   const [data, setData] = useState<Data>(defaultData);
   const {trackViciousCycleOpened, trackViciousCycleEdited} =
     useMixPanelTracking();
@@ -156,17 +157,17 @@ const ViciousCircleEditScreen: AppScreen<'ViciousCircleEdit'> = ({}) => {
 
   return (
     <SafeAreaView>
-      <MainContainerWrapper color={'white'}>
+      <MainContainerWrapper color="white">
         <MainHeader beforeBackButton={handleSave} title={' '} />
-        <MainContainer page={'sub'} color={'white'} style={{flexGrow: 0}}>
+        <MainContainer color="white" page="sub" style={{flexGrow: 0}}>
           <Text textVariant="bigHeader">Bludný kruh</Text>
           {viciousCircle && (
-            <Text textVariant={'textMini'}>
+            <Text textVariant="textMini">
               {moment(viciousCircle.date).format('Do MMMM YYYY, HH:mm')}
             </Text>
           )}
         </MainContainer>
-        <MainContainer page={'withoutFooter'} align="center">
+        <MainContainer align="center" page="withoutFooter">
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={false}
@@ -174,20 +175,20 @@ const ViciousCircleEditScreen: AppScreen<'ViciousCircleEdit'> = ({}) => {
               marginTop: 54,
             }}>
             <ViciousCircle
-              name="SPOUŠTĚČ/MAMUT"
               items={data.trigger}
+              name="SPOUŠTĚČ/MAMUT"
+              style={{
+                marginLeft: size,
+              }}
               onPress={() => setEditor({section: 'trigger'})}
               onPressCircle={() => openOverview('trigger')}
               onPressItem={(index, initText) =>
                 setEditor({section: 'trigger', index, initText})
               }
-              style={{
-                marginLeft: size,
-              }}
             />
             <ViciousCircle
-              name="AUTOMATICKÉ NEGATIVNÍ MYŠLENKY"
               items={data.negativeThoughts}
+              name="AUTOMATICKÉ NEGATIVNÍ MYŠLENKY"
               onPress={() => setEditor({section: 'negativeThoughts'})}
               onPressCircle={() => openOverview('negativeThoughts')}
               onPressItem={(index, initText) =>
@@ -195,8 +196,8 @@ const ViciousCircleEditScreen: AppScreen<'ViciousCircleEdit'> = ({}) => {
               }
             />
             <ViciousCircle
-              name="EMOCE"
               items={data.emotions}
+              name="EMOCE"
               onPress={() => setEditor({section: 'emotions'})}
               onPressCircle={() => openOverview('emotions')}
               onPressItem={(index, initText) =>
@@ -204,8 +205,8 @@ const ViciousCircleEditScreen: AppScreen<'ViciousCircleEdit'> = ({}) => {
               }
             />
             <ViciousCircle
-              name="TĚLESNÉ PŘÍZNAKY"
               items={data.physicalSymptoms}
+              name="TĚLESNÉ PŘÍZNAKY"
               onPress={() => setEditor({section: 'physicalSymptoms'})}
               onPressCircle={() => openOverview('physicalSymptoms')}
               onPressItem={(index, initText) =>
@@ -213,37 +214,37 @@ const ViciousCircleEditScreen: AppScreen<'ViciousCircleEdit'> = ({}) => {
               }
             />
             <ViciousCircle
-              name="CHOVÁNÍ"
               items={data.behaviour}
+              name="CHOVÁNÍ"
+              style={{
+                marginRight: size,
+              }}
               onPress={() => setEditor({section: 'behaviour'})}
               onPressCircle={() => openOverview('behaviour')}
               onPressItem={(index, initText) =>
                 setEditor({section: 'behaviour', index, initText})
               }
-              style={{
-                marginRight: size,
-              }}
             />
           </ScrollView>
-          <Text textVariant={'textMini'}>Kliknutím nebo swipnutím</Text>
+          <Text textVariant="textMini">Kliknutím nebo swipnutím</Text>
 
           {editor && (
             <EditViciousCircleModal
-              title={modalText(editor.section)}
-              initText={editor.initText ? editor.initText : ''}
               close={() => setEditor(null)}
-              save={handleItemSave}
+              initText={editor.initText ? editor.initText : ''}
               remove={handleItemRemove}
+              save={handleItemSave}
+              title={modalText(editor.section)}
             />
           )}
 
           {overview && (
             <DetailViciousCircleModal
+              close={() => setOverview(null)}
               items={data[overview.section]}
               onPressItem={(index, initText) =>
                 setEditor({section: overview.section, index, initText})
               }
-              close={() => setOverview(null)}
             />
           )}
         </MainContainer>

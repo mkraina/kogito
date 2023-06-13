@@ -1,9 +1,10 @@
-import React, {PropsWithChildren} from 'react';
+import React from 'react';
+
 import {Container} from './styles';
 
 export type Color = 'white' | null;
 
-type MainContainerProps = PropsWithChildren & {
+type MainContainerProps = React.PropsWithChildren & {
   color?: Color;
 };
 

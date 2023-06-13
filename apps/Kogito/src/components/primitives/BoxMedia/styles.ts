@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import {variant} from 'styled-system';
-type Props = {isLocked: boolean; isCompleted: boolean; img: boolean};
+
+type Props = {img: boolean; isCompleted: boolean; isLocked: boolean};
 const boxBackgroundColor = (props: Props) => {
   if (props.isLocked) {
     return '#fff';

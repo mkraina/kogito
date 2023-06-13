@@ -1,12 +1,13 @@
 import React from 'react';
-import {AnswerButton, AnswerIndex, Character, Text} from './styles';
 import DropShadow from 'react-native-drop-shadow';
 
+import {AnswerButton, AnswerIndex, Character, Text} from './styles';
+
 type Answer = {
-  index: number;
-  selected: boolean;
   answer: string;
+  index: number;
   press: (index: number) => void;
+  selected: boolean;
 };
 
 const Answer: React.FC<Answer> = ({index, answer, selected, press}) => {

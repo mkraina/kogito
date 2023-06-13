@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
-import {Align, BgColor} from './MainHeader';
 import {variant} from 'styled-system';
+
+import type {Align, BgColor} from './MainHeader';
 
 type View = {
   align?: Align;

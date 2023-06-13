@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
-import {ColorVariants, Type} from './Button';
 import {variant} from 'styled-system';
+
+import type {ColorVariants, Type} from './Button';
 
 type Button = {
   colorVariant: ColorVariants;

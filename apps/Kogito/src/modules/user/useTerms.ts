@@ -1,5 +1,5 @@
-import RNSecureStorage, {ACCESSIBLE} from 'rn-secure-storage';
 import {useEffect, useState} from 'react';
+import RNSecureStorage, {ACCESSIBLE} from 'rn-secure-storage';
 
 export const useTerms = () => {
   const [haveSeenTerms, setHaveSeenTerms] = useState(false);

@@ -1,11 +1,13 @@
-import React, {PropsWithChildren} from 'react';
-import {Container, ContainerInner, Center, TextSmall, TextMain} from './styles';
+import React from 'react';
+import {TouchableOpacity} from 'react-native';
+
+import HeroAnxiety from '../../../assets/anxiety/hero.svg';
+import HeroDepression from '../../../assets/depression/hero.svg';
 import Button from '../Button';
 import GradientBackground from '../GradientBackground';
 import ProgressBar from '../ProgressBar';
-import {TouchableOpacity} from 'react-native';
-import HeroAnxiety from '../../../assets/anxiety/hero.svg';
-import HeroDepression from '../../../assets/depression/hero.svg';
+
+import {Center, Container, ContainerInner, TextMain, TextSmall} from './styles';
 
 export type ImageVariant = 'depression' | 'anxiety';
 export type StateVariants = 'onlyHeadline' | 'mainInfo' | 'normal';
@@ -25,15 +27,15 @@ const decideColors = (
     : {color1: 'transparent', color2: 'transparent'};
 };
 
-type MainContainerProps = PropsWithChildren & {
+type MainContainerProps = React.PropsWithChildren & {
+  onPress?: () => void;
+
+  onPressContinue?: () => void;
+  progress?: number;
   state?: StateVariants;
 
   subTitle?: string;
   title?: string;
-  progress?: number;
-
-  onPressContinue?: () => void;
-  onPress?: () => void;
 
   variant?: ImageVariant;
 };
@@ -75,9 +77,9 @@ const Hero: React.FC<MainContainerProps> = ({
           <Center state={state}>
             {state !== 'onlyHeadline' && (
               <ProgressBar
-                value={progress}
                 max={100}
-                progressBarVariants={'small'}
+                progressBarVariants="small"
+                value={progress}
               />
             )}
 
@@ -85,12 +87,12 @@ const Hero: React.FC<MainContainerProps> = ({
 
             {state === 'normal' && (
               <Button
-                title={'Pokračovat'}
-                colorVariant={'orange'}
-                type={'medium'}
+                colorVariant="orange"
                 style={{
                   alignSelf: 'center',
                 }}
+                title="Pokračovat"
+                type="medium"
                 onPress={onPressContinue}
               />
             )}

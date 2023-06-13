@@ -1,11 +1,12 @@
-import React, {PropsWithChildren} from 'react';
+import React from 'react';
 import {SafeAreaView} from 'react-native';
+
 import GradientBackground from './GradientBackground';
 
-type GradientProps = PropsWithChildren & {
+type GradientProps = React.PropsWithChildren & {
+  angle?: number;
   color1?: string;
   color2?: string;
-  angle?: number;
 };
 
 const ColoredSafeAreaView: React.FC<GradientProps> = ({
@@ -18,7 +19,7 @@ const ColoredSafeAreaView: React.FC<GradientProps> = ({
     <>
       <SafeAreaView style={{flex: 0, backgroundColor: color1}} />
       <SafeAreaView style={{flex: 1, backgroundColor: color2}}>
-        <GradientBackground color1={color1} color2={color2} angle={angle}>
+        <GradientBackground angle={angle} color1={color1} color2={color2}>
           {children}
         </GradientBackground>
       </SafeAreaView>

@@ -1,6 +1,6 @@
 import {gql, useQuery} from '@apollo/client';
 
-import {
+import type {
   MeQueryQuery,
   MeQueryQueryVariables,
 } from '../../../gql/__generated__/graphql';

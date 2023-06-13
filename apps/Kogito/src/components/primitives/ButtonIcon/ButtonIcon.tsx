@@ -1,9 +1,10 @@
-import React, {PropsWithChildren} from 'react';
-import S from './styles';
+import React from 'react';
+import type {TouchableOpacityProps} from 'react-native';
 import DropShadow from 'react-native-drop-shadow';
-import {TouchableOpacityProps} from 'react-native';
 
-const ButtonIcon: React.FC<PropsWithChildren & TouchableOpacityProps> = ({
+import S from './styles';
+
+const ButtonIcon: React.FC<React.PropsWithChildren & TouchableOpacityProps> = ({
   children,
   ...rest
 }) => {

@@ -1,5 +1,6 @@
 import {gql, useMutation} from '@apollo/client';
-import {
+
+import type {
   SwitchJourneyMutation,
   SwitchJourneyMutationVariables,
 } from '../../../gql/__generated__/graphql';

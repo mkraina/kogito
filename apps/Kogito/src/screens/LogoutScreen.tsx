@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {SafeAreaView} from 'react-native';
 import {useApolloClient} from '@apollo/client';
+
 import {useAuth} from '../modules/auth/useAuth';
 import type {AppScreen} from '../navigation/Navigation';
 

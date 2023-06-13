@@ -1,7 +1,3 @@
-type Placing = 'bonusRelaxationOverview' | 'audioDetail';
-
-import BoxImg4 from '../assets/box-img-4.png';
-
 import BonusRelaxFireplace from '../assets/bonusRelaxation/fireplace.png';
 import BonusRelaxMeadow from '../assets/bonusRelaxation/meadow.png';
 import BonusRelaxMusicOfBreathingExercises from '../assets/bonusRelaxation/musicOfBreathingExercises.png';
@@ -13,7 +9,8 @@ import BonusRelaxRelaxation from '../assets/bonusRelaxation/relaxation.png';
 import BonusRelaxScanningOwnBody from '../assets/bonusRelaxation/scanningOwnBody.png';
 import BonusRelaxStream from '../assets/bonusRelaxation/stream.png';
 import BonusRelaxWoods from '../assets/bonusRelaxation/woods.png';
-
+import BoxImg4 from '../assets/box-img-4.png';
+import ImageRelaxFireplace from '../assets/images/fireplace.png';
 import Image1 from '../assets/images/image_1.png';
 import Image2 from '../assets/images/image_2.png';
 import Image3 from '../assets/images/image_3.png';
@@ -29,8 +26,6 @@ import Image12 from '../assets/images/image_12.png';
 import Image13 from '../assets/images/image_13.png';
 import Image14 from '../assets/images/image_14.png';
 import Image15 from '../assets/images/image_15.png';
-
-import ImageRelaxFireplace from '../assets/images/fireplace.png';
 import ImageRelaxMeadow from '../assets/images/meadow.png';
 import ImageRelaxMusicOfBreathingExercises from '../assets/images/musicOfBreathingExercises.png';
 import ImageRelaxMusicOfProgressiveMuscleRelaxation from '../assets/images/musicOfProgressiveMuscleRelaxation.png';
@@ -42,7 +37,10 @@ import ImageRelaxScanningOwnBody from '../assets/images/scanningOwnBody.png';
 import ImageRelaxStream from '../assets/images/stream.png';
 import ImageRelaxWoods from '../assets/images/woods.png';
 
-export default function (placing: Placing, image: string | null): number {
+type Placing = 'bonusRelaxationOverview' | 'audioDetail';
+
+// eslint-disable-next-line max-lines-per-function, complexity
+export default (placing: Placing, image: string | null) => {
   if (placing === 'bonusRelaxationOverview') {
     switch (image) {
       case 'bonusRelaxation/rain':
@@ -129,4 +127,4 @@ export default function (placing: Placing, image: string | null): number {
     default:
       return Image1;
   }
-}
+};

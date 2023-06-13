@@ -1,8 +1,9 @@
 import React from 'react';
+import DropShadow from 'react-native-drop-shadow';
 import styled from 'styled-components/native';
 import {variant} from 'styled-system';
+
 import Check from '../../../assets/check.svg';
-import DropShadow from 'react-native-drop-shadow';
 
 const StyledButton = styled.TouchableOpacity``;
 const Wrapper = styled.View<{finished: boolean}>`
@@ -41,9 +42,9 @@ const Text = styled.Text`
 `;
 
 type QuestionnaireWidget = {
-  press: () => void;
-  name: string;
   finished: boolean;
+  name: string;
+  press: () => void;
   count?: number;
 };
 

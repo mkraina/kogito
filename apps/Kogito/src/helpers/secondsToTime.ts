@@ -1,5 +1,5 @@
-export const secondsToTime = (seconds: number): string => {
-  seconds = seconds < 0 ? 0 : seconds;
+export const secondsToTime = (input: number): string => {
+  const seconds = input < 0 ? 0 : input;
 
   const h = Math.floor(seconds / 3600)
       .toString()
@@ -11,5 +11,5 @@ export const secondsToTime = (seconds: number): string => {
       .toString()
       .padStart(2, '0');
 
-  return h !== '00' ? `${h}:${m}:${s}` : `${m}:${s}`;
+  return h === '00' ? `${m}:${s}` : `${h}:${m}:${s}`;
 };

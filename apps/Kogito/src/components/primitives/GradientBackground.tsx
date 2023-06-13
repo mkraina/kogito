@@ -1,10 +1,10 @@
-import React, {PropsWithChildren} from 'react';
+import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
-type GradientProps = PropsWithChildren & {
+type GradientProps = React.PropsWithChildren & {
+  angle?: number;
   color1?: string;
   color2?: string;
-  angle?: number;
 };
 
 const GradientBackground: React.FC<GradientProps> = ({
@@ -14,7 +14,7 @@ const GradientBackground: React.FC<GradientProps> = ({
   angle = 148,
 }) => {
   return (
-    <LinearGradient colors={[color1, color2]} useAngle={true} angle={angle}>
+    <LinearGradient angle={angle} colors={[color1, color2]} useAngle={true}>
       {children}
     </LinearGradient>
   );

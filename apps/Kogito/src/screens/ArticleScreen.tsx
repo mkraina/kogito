@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, ScrollView, useWindowDimensions} from 'react-native';
-import type {AppScreen} from '../navigation/Navigation';
-import MainContainerWrapper from '../components/container/MainContainerWrapper';
-import MainContainer from '../components/container/MainContainer/MainContainer';
-import {useItemContent} from '../modules/content/useItemContent';
 import HTML from 'react-native-render-html';
+
+import MainContainer from '../components/container/MainContainer/MainContainer';
+import MainContainerWrapper from '../components/container/MainContainerWrapper';
+import Button from '../components/primitives/Button';
 import ProgressBar from '../components/primitives/ProgressBar/ProgressBar';
 import Text from '../components/primitives/Text';
-import Button from '../components/primitives/Button';
-
-import {useTrackProgress} from '../modules/content/useTrackProgress';
 import useEventListener from '../helpers/useEventListener';
+import {useItemContent} from '../modules/content/useItemContent';
+import {useTrackProgress} from '../modules/content/useTrackProgress';
+import type {AppScreen} from '../navigation/Navigation';
 import useMixPanelTracking from '../tracking/useMixPanelTracking';
 
 const styles = {
@@ -78,11 +78,11 @@ const ArticleScreen: AppScreen<'Article'> = ({navigation, route}) => {
   return (
     <SafeAreaView>
       {articleItem && (
-        <MainContainerWrapper color={'white'}>
-          <ProgressBar value={position} max={articleItem.content.length} />
-          <MainContainer page={'subWithoutFooter'} color={'white'}>
+        <MainContainerWrapper color="white">
+          <ProgressBar max={articleItem.content.length} value={position} />
+          <MainContainer color="white" page="subWithoutFooter">
             <ScrollView contentContainerStyle={{flexGrow: 1}}>
-              <Text textVariant={'header'} space={'mainY'}>
+              <Text space="mainY" textVariant="header">
                 {articleItem.name}
               </Text>
               <HTML
@@ -95,11 +95,11 @@ const ArticleScreen: AppScreen<'Article'> = ({navigation, route}) => {
                 }}
               />
               <Button
-                onPress={handlePress}
-                title={articleItem.content[position].continue}
                 style={{
                   marginTop: 'auto',
                 }}
+                title={articleItem.content[position].continue}
+                onPress={handlePress}
               />
             </ScrollView>
           </MainContainer>

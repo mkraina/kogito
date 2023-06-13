@@ -2,19 +2,21 @@ import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
-  View,
-  TouchableOpacity,
   StyleSheet,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import {RouteProp, useRoute} from '@react-navigation/native';
-import {RootStackParamList} from '../navigation/Navigation';
+import HTML from 'react-native-render-html';
+import YoutubePlayer from 'react-native-youtube-iframe';
+import type {RouteProp} from '@react-navigation/native';
+import {useRoute} from '@react-navigation/native';
+
+import MainContainer from '../components/container/MainContainer/MainContainer';
 import MainContainerWrapper from '../components/container/MainContainerWrapper';
 import MainHeader from '../components/container/MainHeader/MainHeader';
 import Text from '../components/primitives/Text';
-import MainContainer from '../components/container/MainContainer/MainContainer';
 import {useStoryContent} from '../modules/content/useStoryContent';
-import HTML from 'react-native-render-html';
-import YoutubePlayer from 'react-native-youtube-iframe';
+import type {RootStackParamList} from '../navigation/Navigation';
 import useMixPanelTracking from '../tracking/useMixPanelTracking';
 
 export type StoryDetail = RouteProp<RootStackParamList, 'StoryDetail'>;
@@ -63,14 +65,14 @@ const StoryDetailScreen: React.FC = () => {
         <MainContainerWrapper>
           <MainHeader />
           <ScrollView>
-            <MainContainer page={'sub'} color={'white'}>
-              <Text textVariant={'header'}>{story.title}</Text>
+            <MainContainer color="white" page="sub">
+              <Text textVariant="header">{story.title}</Text>
               {story.videoLink && (
                 <View>
                   <YoutubePlayer
                     forceAndroidAutoplay={true}
-                    play={playing}
                     height={200}
+                    play={playing}
                     videoId={story.videoLink}
                     onChangeState={onStateChange}
                   />

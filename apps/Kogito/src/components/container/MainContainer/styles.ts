@@ -1,12 +1,13 @@
 import styled from 'styled-components/native';
-import {Align, AlignVertical, Color, Page} from './MainContainer';
 import {variant} from 'styled-system';
+
+import type {Align, AlignVertical, Color, Page} from './MainContainer';
 
 type View = {
   align?: Align;
   alignVertical?: AlignVertical;
-  page?: Page;
   color?: Color;
+  page?: Page;
 };
 
 export const Container = styled.View<View>`

@@ -1,16 +1,18 @@
 import React from 'react';
+
 import Check from '../../../assets/check.svg';
-import S from './styles';
 import ProgressBar from '../ProgressBar';
+
+import S from './styles';
 
 export type LevelWidgetVariant = 'done' | 'inProgress' | 'locked';
 
 type ContainerProps = {
   name: string;
-  state?: LevelWidgetVariant;
-  onPress?: () => void;
   progress: number;
   maxProgress?: number;
+  onPress?: () => void;
+  state?: LevelWidgetVariant;
 };
 
 const LevelWidget: React.FC<ContainerProps> = ({
@@ -29,9 +31,9 @@ const LevelWidget: React.FC<ContainerProps> = ({
         {state === 'done' && <Check />}
         {state === 'inProgress' && (
           <ProgressBar
-            progressBarVariants={'level'}
-            value={progress}
             max={maxProgress}
+            progressBarVariants="level"
+            value={progress}
           />
         )}
       </S.Wrapper>

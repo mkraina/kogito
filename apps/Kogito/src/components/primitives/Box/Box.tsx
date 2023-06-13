@@ -1,16 +1,18 @@
 import React from 'react';
-import {Container, Text, TextWrapper, Image, Wrapper} from './styles';
-import IconPlay from '../../../assets/icon-play.svg';
 import DropShadow from 'react-native-drop-shadow';
 
+import IconPlay from '../../../assets/icon-play.svg';
+
+import {Container, Image, Text, TextWrapper, Wrapper} from './styles';
+
 type ContainerProps = {
-  title?: string;
   img: number;
+  isBonus?: boolean;
   isDisabled?: boolean;
   isMedia?: boolean;
-  isBonus?: boolean;
-  onPress?: () => void;
   maxHeight?: boolean;
+  onPress?: () => void;
+  title?: string;
 };
 
 const Box: React.FC<ContainerProps> = ({
@@ -31,7 +33,7 @@ const Box: React.FC<ContainerProps> = ({
           shadowOffset: {width: 0, height: 4},
           shadowRadius: 10,
         }}>
-        <Wrapper isDisabled={isDisabled} isBonus={isBonus}>
+        <Wrapper isBonus={isBonus} isDisabled={isDisabled}>
           <Image source={img} style={maxHeight ? {height: 100} : {}} />
           <TextWrapper isBonus={isBonus}>
             <Text isBonus={isBonus}>{title}</Text>

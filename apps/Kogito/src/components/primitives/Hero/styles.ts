@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import {variant} from 'styled-system';
-import {StateVariants} from './Hero';
+
+import type {StateVariants} from './Hero';
 
 export const Link = styled.TouchableOpacity``;
 

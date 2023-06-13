@@ -1,9 +1,10 @@
-import {
+import {gql, useMutation} from '@apollo/client';
+
+import type {
   FinishRegistrationMutation,
   FinishRegistrationMutationVariables,
 } from '../../../gql/__generated__/graphql';
 
-import {gql, useMutation} from '@apollo/client';
 const mutation = gql`
   mutation finishRegistration($input: FinishRegistrationInput!) {
     finishRegistration(input: $input) {

@@ -1,7 +1,9 @@
 import React from 'react';
-import {StyledButton} from './styles';
-import ReactNative from 'react-native';
+import type ReactNative from 'react-native';
+
 import IconBack from '../../../assets/icon-chevron-left.svg';
+
+import {StyledButton} from './styles';
 
 export type ColorVariants = 'red' | 'white' | 'transparent';
 

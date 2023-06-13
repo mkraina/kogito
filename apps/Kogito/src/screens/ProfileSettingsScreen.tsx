@@ -1,14 +1,15 @@
 import React from 'react';
 import {Alert, SafeAreaView, ToastAndroid, View} from 'react-native';
-import MainContainerWrapper from '../components/container/MainContainerWrapper/MainContainerWrapper';
-import MainContainer from '../components/container/MainContainer/MainContainer';
-import Text from '../components/primitives/Text';
-import Button from '../components/primitives/Button/Button';
 import {getReadableVersion} from 'react-native-device-info';
+
+import MainContainer from '../components/container/MainContainer/MainContainer';
+import MainContainerWrapper from '../components/container/MainContainerWrapper/MainContainerWrapper';
+import Button from '../components/primitives/Button/Button';
 import Divider from '../components/primitives/Divider';
+import Text from '../components/primitives/Text';
+import {ENV} from '../env';
 import ProfileSettingsForm from '../modules/user/form/ProfileSettingsForm';
 import type {AppScreen} from '../navigation/Navigation';
-import {ENV} from '../env';
 
 const ProfileSettingsScreen: AppScreen<'ProfileSettings'> = ({navigation}) => {
   const confirmLogoutModal = () => {
@@ -32,7 +33,7 @@ const ProfileSettingsScreen: AppScreen<'ProfileSettings'> = ({navigation}) => {
           alignVertical="between"
           style={{paddingTop: 24, paddingBottom: 56}}>
           <View>
-            <Text textVariant={'header'}>Profil</Text>
+            <Text textVariant="header">Profil</Text>
 
             <ProfileSettingsForm
               onSuccess={() =>
@@ -40,16 +41,16 @@ const ProfileSettingsScreen: AppScreen<'ProfileSettings'> = ({navigation}) => {
               }
             />
             <Button
-              type="small"
-              title="Chci změnit cestu"
-              onPress={() => navigation.navigate('JourneySwitch')}
               style={{marginBottom: 10}}
+              title="Chci změnit cestu"
+              type="small"
+              onPress={() => navigation.navigate('JourneySwitch')}
             />
             <Divider />
             <Button
-              type="small"
               colorVariant="transparent"
               title="Odhlásit se"
+              type="small"
               onPress={confirmLogoutModal}
             />
             <Text align="center" textVariant="textMini">

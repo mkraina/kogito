@@ -1,16 +1,18 @@
 import React from 'react';
-import S from './styles';
+import {useNavigation} from '@react-navigation/native';
+
 import IconUser from '../../../assets/icon-user.svg';
 import GoBack from '../../primitives/GoBack';
-import {useNavigation} from '@react-navigation/native';
+
+import S from './styles';
 
 export type Align = 'left' | 'right';
 export type BgColor = 'transparent';
 
 type MainContainerProps = {
+  beforeBackButton?: () => Promise<void>;
   title?: string;
   useTransparent?: boolean;
-  beforeBackButton?: () => Promise<void>;
 };
 
 const MainHeader: React.FC<MainContainerProps> = ({
@@ -24,7 +26,7 @@ const MainHeader: React.FC<MainContainerProps> = ({
   return (
     <S.Container bgColor={useTransparent ? 'transparent' : undefined}>
       {title ? (
-        <GoBack title={title} beforeBackButton={beforeBackButton} />
+        <GoBack beforeBackButton={beforeBackButton} title={title} />
       ) : (
         <IconUser onPress={() => navigation.navigate('ProfileSettings')} />
       )}

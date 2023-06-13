@@ -53,7 +53,7 @@ export const TextWrapper = styled.View<{isBonus: boolean}>`
   })};
 `;
 export const Container = styled.TouchableOpacity``;
-export const Wrapper = styled.View<{isDisabled: boolean; isBonus: boolean}>`
+export const Wrapper = styled.View<{isBonus: boolean; isDisabled: boolean}>`
   border-radius: 15px;
   background: #ffffff;
   width: 180px;

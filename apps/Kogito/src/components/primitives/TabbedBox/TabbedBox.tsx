@@ -1,11 +1,13 @@
-import React, {ReactNode, useEffect, useState} from 'react';
+import type {ReactNode} from 'react';
+import React, {useEffect, useState} from 'react';
+
 import S from './styles';
 
 type HeaderVariant = 'boxed' | 'headers';
 
 type Item = {
-  label: string;
   id: string;
+  label: string;
   render: () => ReactNode;
 };
 
@@ -15,9 +17,9 @@ type TabbedBox = {
 };
 
 type NavigationItem = {
-  title: string;
   active: boolean;
   onPress: () => void;
+  title: string;
 };
 
 const NavigationItem: React.FC<NavigationItem> = ({title, active, onPress}) => {
@@ -66,8 +68,8 @@ const TabbedBox: React.FC<TabbedBox> = ({items, headerVariant = 'boxed'}) => {
               items.map(item => (
                 <NavigationItem
                   key={item.id}
-                  title={item.label}
                   active={item === selected}
+                  title={item.label}
                   onPress={() => setSelected(item)}
                 />
               ))}
@@ -75,8 +77,8 @@ const TabbedBox: React.FC<TabbedBox> = ({items, headerVariant = 'boxed'}) => {
               items.map(item => (
                 <LinkItem
                   key={item.id}
-                  title={item.label}
                   active={item === selected}
+                  title={item.label}
                   onPress={() => setSelected(item)}
                 />
               ))}

@@ -1,16 +1,18 @@
-import React from 'react';
-import {StatusBar} from 'react-native';
-import {ApolloProvider} from '@apollo/client';
-import ApolloClient from './src/apollo/client';
-import {AuthProvider} from './src/modules/auth/auth-context';
-import Navigation from './src/navigation/Navigation';
-import {NavigationContainer} from '@react-navigation/native';
-import Moment from 'react-moment';
 import 'moment/locale/cs';
-import LogMoodModal from './src/modules/diary/modal/LogMoodModal/LogMoodModal';
-import MixPanelTrackingProvider from './src/tracking/MixPanelTracking';
-import {ENV} from './src/env';
+
+import React from 'react';
+import Moment from 'react-moment';
+import {StatusBar} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {ApolloProvider} from '@apollo/client';
+import {NavigationContainer} from '@react-navigation/native';
+
+import ApolloClient from './src/apollo/client';
+import {ENV} from './src/env';
+import {AuthProvider} from './src/modules/auth/auth-context';
+import LogMoodModal from './src/modules/diary/modal/LogMoodModal/LogMoodModal';
+import Navigation from './src/navigation/Navigation';
+import MixPanelTrackingProvider from './src/tracking/MixPanelTracking';
 
 Moment.globalLocale = 'cs';
 Moment.globalFormat = 'Do MMMM YYYY';

@@ -12,10 +12,10 @@ const query = gql`
 `;
 
 type RegisterStatus = {
-  isCompleted: boolean;
-  userLabel: `V${'a' | 'b' | 'c' | 'd' | 'e' | 'f'}`;
-  journeysToChoose: string[];
   group: 'normal' | 'control';
+  isCompleted: boolean;
+  journeysToChoose: string[];
+  userLabel: `V${'a' | 'b' | 'c' | 'd' | 'e' | 'f'}`;
 };
 
 export const useRegistrationStatus = () => {

@@ -1,13 +1,15 @@
-import React, {PropsWithChildren} from 'react';
-import S from './styles';
-import EmoticonSatisfied from '../../../assets/emotions/satisfied.png';
+import React from 'react';
+
+import type {Mood} from '../../../../gql/__generated__/graphql';
 import EmoticonHappy from '../../../assets/emotions/happy.png';
 import EmoticonOkay from '../../../assets/emotions/okay.png';
 import EmoticonSad from '../../../assets/emotions/sad.png';
+import EmoticonSatisfied from '../../../assets/emotions/satisfied.png';
 import EmoticonVerysad from '../../../assets/emotions/verysad.png';
-import {Mood} from '../../../../gql/__generated__/graphql';
 
-type MoodRecordProps = PropsWithChildren & {
+import S from './styles';
+
+type MoodRecordProps = React.PropsWithChildren & {
   type: Mood;
   onLongPress?: () => void;
 };

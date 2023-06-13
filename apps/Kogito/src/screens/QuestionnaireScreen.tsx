@@ -1,17 +1,19 @@
 import React, {useEffect} from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
-import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
-import ProgressBar from '../components/primitives/ProgressBar/ProgressBar';
-import Text from '../components/primitives/Text';
-import {useQuestionnaire} from '../modules/questionnaire/useQuestionnaire';
-import Answer from '../modules/questionnaire/components/Answer/';
-import Button from '../components/primitives/Button/Button';
-import ChapterHeader from '../components/primitives/ChapterHeader/ChapterHeader';
+import type {RouteProp} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import styled from 'styled-components/native';
+
 import MainContainer from '../components/container/MainContainer/MainContainer';
 import MainContainerWrapper from '../components/container/MainContainerWrapper/MainContainerWrapper';
-import styled from 'styled-components/native';
+import Button from '../components/primitives/Button/Button';
 import ButtonBack from '../components/primitives/ButtonBack';
-import {RegistrationStackParamList} from '../navigation/Navigation';
+import ChapterHeader from '../components/primitives/ChapterHeader/ChapterHeader';
+import ProgressBar from '../components/primitives/ProgressBar/ProgressBar';
+import Text from '../components/primitives/Text';
+import Answer from '../modules/questionnaire/components/Answer/';
+import {useQuestionnaire} from '../modules/questionnaire/useQuestionnaire';
+import type {RegistrationStackParamList} from '../navigation/Navigation';
 
 export const Footer = styled.View`
   flex-direction: row;
@@ -54,7 +56,7 @@ const QuestionnaireScreen: React.FC = () => {
   return (
     <SafeAreaView>
       <MainContainerWrapper>
-        <ProgressBar value={actualIndex} max={questionCount} />
+        <ProgressBar max={questionCount} value={actualIndex} />
         <MainContainer
           alignVertical="between"
           style={{paddingTop: 24, paddingBottom: 56}}>
@@ -65,22 +67,22 @@ const QuestionnaireScreen: React.FC = () => {
               </Text>
             }
             right={
-              <Text textVariant={'textSmall'}>{`zbývá ${
+              <Text textVariant="textSmall">{`zbývá ${
                 questionCount - 1 - actualIndex
               } otázek`}</Text>
             }
           />
           <ScrollView>
             <Questions>
-              <Text textVariant={'header'}>{actualQuestion.question}</Text>
+              <Text textVariant="header">{actualQuestion.question}</Text>
               <AnswerWrapper>
                 {actualQuestion.answers.map((answer, index) => (
                   <Answer
                     key={index}
-                    index={index}
-                    selected={actualAnswer === index}
                     answer={answer.answer}
+                    index={index}
                     press={i => saveAnswer(i)}
+                    selected={actualAnswer === index}
                   />
                 ))}
               </AnswerWrapper>
@@ -89,8 +91,8 @@ const QuestionnaireScreen: React.FC = () => {
           <Footer>
             {havePrevious && (
               <ButtonBack
-                onPress={previousQuestion}
                 style={{marginRight: 16}}
+                onPress={previousQuestion}
               />
             )}
             {haveNext && <Button title="Pokračovat" onPress={nextQuestion} />}

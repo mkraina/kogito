@@ -1,3 +1,4 @@
+import type {NormalizedCacheObject} from '@apollo/client';
 import {
   ApolloClient,
   ApolloLink,
@@ -5,26 +6,27 @@ import {
   fromPromise,
   gql,
   InMemoryCache,
-  NormalizedCacheObject,
 } from '@apollo/client';
-import {onError} from 'apollo-link-error';
-import {getAccessToken, getRefreshToken, saveTokens} from '../modules/auth/api';
 import {setContext} from '@apollo/client/link/context';
-import {
+import {onError} from 'apollo-link-error';
+
+import type {
   RefreshAccessTokenMutation,
   RefreshAccessTokenMutationVariables,
 } from '../../gql/__generated__/graphql';
 import {ENV} from '../env';
+import {getAccessToken, getRefreshToken, saveTokens} from '../modules/auth/api';
 
 console.log('APOLLO USING:', ENV.API_URL);
 
 let isRefreshing = false;
-// @ts-ignore
+// @ts-expect-error
 let pendingRequests = [];
+// eslint-disable-next-line prefer-const
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
 const resolvePendingRequests = () => {
-  // @ts-ignore
+  // @ts-expect-error
   pendingRequests.map(callback => callback());
   pendingRequests = [];
 };
@@ -89,15 +91,17 @@ const authLink = setContext(async () => {
   };
 });
 
-// @ts-ignore
+// @ts-expect-error
 const errorLink = onError(({graphQLErrors, operation, forward}) => {
   console.log({graphQLErrors});
   if (graphQLErrors) {
-    for (let err of graphQLErrors) {
+    for (const err of graphQLErrors) {
       switch (err.message) {
         case 'Unauthorized':
+          // eslint-disable-next-line no-case-declarations
           let forward$;
 
+          // eslint-disable-next-line max-depth, no-negated-condition
           if (!isRefreshing) {
             isRefreshing = true;
             forward$ = fromPromise(
@@ -107,11 +111,13 @@ const errorLink = onError(({graphQLErrors, operation, forward}) => {
                   resolvePendingRequests();
                   return true;
                 })
+                // eslint-disable-next-line no-loop-func
                 .catch(() => {
                   pendingRequests = [];
                   // Handle token refresh errors e.g clear stored tokens, redirect to login, ...
                   throw new Error();
                 })
+                // eslint-disable-next-line no-loop-func
                 .finally(() => {
                   isRefreshing = false;
                 }),
@@ -119,14 +125,15 @@ const errorLink = onError(({graphQLErrors, operation, forward}) => {
           } else {
             // Will only emit once the Promise is resolved
             forward$ = fromPromise(
+              // eslint-disable-next-line no-loop-func
               new Promise(resolve => {
-                // @ts-ignore
+                // @ts-expect-error
                 pendingRequests.push(() => resolve());
               }),
             );
           }
 
-          // @ts-ignore
+          // @ts-expect-error
           return forward$.flatMap(() => forward(operation));
       }
     }
@@ -134,7 +141,7 @@ const errorLink = onError(({graphQLErrors, operation, forward}) => {
 });
 
 apolloClient = new ApolloClient({
-  // @ts-ignore
+  // @ts-expect-error
   link: ApolloLink.from([errorLink, authLink, targetEndPointLink]),
   cache: new InMemoryCache(),
 });

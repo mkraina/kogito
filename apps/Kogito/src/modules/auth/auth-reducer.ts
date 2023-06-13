@@ -1,5 +1,6 @@
-import {Reducer} from 'react';
-import {AuthStatus} from './auth-types';
+import type {Reducer} from 'react';
+
+import type {AuthStatus} from './auth-types';
 
 const START_AUTH = 'startAuthenticating';
 const FINISH_AUTH = 'finishAuthenticating';
@@ -11,12 +12,12 @@ type BaseAction<T, P = unknown> = {
   payload?: P;
 };
 
-function createAction<T, P>(type: T, payload?: P): BaseAction<T, P> {
+const createAction = <T, P>(type: T, payload?: P): BaseAction<T, P> => {
   return {
     type,
     payload,
   };
-}
+};
 
 export type AuthState = {
   accessToken: string | null;

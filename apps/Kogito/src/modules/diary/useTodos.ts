@@ -1,5 +1,6 @@
 import {gql, useMutation, useQuery} from '@apollo/client';
-import {
+
+import type {
   EditTodoMutation,
   EditTodoMutationVariables,
   RemoveTodoMutation,

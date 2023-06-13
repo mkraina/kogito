@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
-import {BackHandler, Image} from 'react-native';
+import {BackHandler, Image, ScrollView} from 'react-native';
+import HTML from 'react-native-render-html';
+
+import Logo from '../assets/logo.png';
 import MainContainer from '../components/container/MainContainer';
 import MainContainerWrapper from '../components/container/MainContainerWrapper';
-import HTML from 'react-native-render-html';
-import terms from '../modules/user/data/terms';
-import {ScrollView} from 'react-native';
 import Button from '../components/primitives/Button';
-import {useTerms} from '../modules/user/useTerms';
 import ColoredSafeAreaView from '../components/primitives/ColoredSafeAreaView';
-import Logo from '../assets/logo.png';
+import terms from '../modules/user/data/terms';
+import {useTerms} from '../modules/user/useTerms';
 import type {AppScreen} from '../navigation/Navigation';
 
 const TermsScreen: AppScreen<'Terms'> = ({navigation}) => {
@@ -37,15 +37,15 @@ const TermsScreen: AppScreen<'Terms'> = ({navigation}) => {
             <Image source={Logo} />
             <HTML source={{html: terms}} />
             <Button
-              onPress={handleAgreePress}
-              title="Souhlasím"
               style={{marginTop: -50}}
+              title="Souhlasím"
+              onPress={handleAgreePress}
             />
             <Button
-              onPress={handleDeclinePress}
-              type="small"
               colorVariant="transparent"
               title="Ne"
+              type="small"
+              onPress={handleDeclinePress}
             />
           </MainContainer>
         </ScrollView>

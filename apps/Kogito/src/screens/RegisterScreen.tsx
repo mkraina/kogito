@@ -1,14 +1,16 @@
 import React from 'react';
-import Text from '../components/primitives/Text';
-import Button from '../components/primitives/Button';
-import MainContainer from '../components/container/MainContainer';
-import LogoFooter from '../assets/login-logo-footer.svg';
-import {LogoFooterWrapper} from './LoginScreen';
-import RegisterImg from '../assets/register-img.svg';
-import styled from 'styled-components/native';
 import {useNavigation} from '@react-navigation/native';
+import styled from 'styled-components/native';
+
+import LogoFooter from '../assets/login-logo-footer.svg';
+import RegisterImg from '../assets/register-img.svg';
+import MainContainer from '../components/container/MainContainer';
+import Button from '../components/primitives/Button';
 import ColoredSafeAreaView from '../components/primitives/ColoredSafeAreaView';
+import Text from '../components/primitives/Text';
 import type {AppScreen} from '../navigation/Navigation';
+
+import {LogoFooterWrapper} from './LoginScreen';
 
 export const RegisterImgWrapper = styled.View`
   margin-top: auto;

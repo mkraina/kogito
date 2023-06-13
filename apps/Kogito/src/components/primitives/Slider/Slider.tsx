@@ -1,11 +1,12 @@
 import React from 'react';
-import S from './styles';
 import * as NativeSlider from '@react-native-community/slider';
+
+import S from './styles';
 
 type Slider = {
   progress: number;
-  onSlidingStart?: () => void;
   onSeek?: (progress: number) => void;
+  onSlidingStart?: () => void;
 };
 
 const Slider: React.FC<Slider> = ({
@@ -16,15 +17,15 @@ const Slider: React.FC<Slider> = ({
   return (
     <S.Wrapper>
       <NativeSlider.default
-        minimumValue={0}
-        maximumValue={100}
-        value={progress}
-        minimumTrackTintColor="#ca4233"
         maximumTrackTintColor="#f7dcda"
-        thumbTintColor="#E0E0E0"
+        maximumValue={100}
+        minimumTrackTintColor="#ca4233"
+        minimumValue={0}
         style={{width: '100%', height: 5}}
-        onSlidingStart={onSlidingStart}
+        thumbTintColor="#E0E0E0"
+        value={progress}
         onSlidingComplete={onSeek}
+        onSlidingStart={onSlidingStart}
       />
     </S.Wrapper>
   );

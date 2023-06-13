@@ -1,7 +1,8 @@
-import React, {PropsWithChildren} from 'react';
+import React from 'react';
+
 import S from './styles';
 
-type ContainerProps = PropsWithChildren;
+type ContainerProps = React.PropsWithChildren;
 
 const BoxMediaWrapper: React.FC<ContainerProps> = ({children, ...rest}) => {
   return (

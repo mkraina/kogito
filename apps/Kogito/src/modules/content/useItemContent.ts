@@ -1,6 +1,6 @@
-import {gql} from '@apollo/client';
-import {useQuery} from '@apollo/client';
-import {
+import {gql, useQuery} from '@apollo/client';
+
+import type {
   ItemDetailQuery,
   ItemDetailQueryVariables,
 } from '../../../gql/__generated__/graphql';

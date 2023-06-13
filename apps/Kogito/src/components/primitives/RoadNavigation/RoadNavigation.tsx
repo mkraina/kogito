@@ -1,7 +1,8 @@
 import React from 'react';
-import S from './styles';
+import type {ViewProps} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {ViewProps} from 'react-native';
+
+import S from './styles';
 
 export type activeVariants = 'phase' | 'tools' | 'relaxation' | 'todos' | null;
 

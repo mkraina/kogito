@@ -81,11 +81,11 @@ const S = {
 };
 
 type BoxJourneyProps = {
+  description: string;
   highlighted: boolean;
   index: number;
-  title: string;
-  description: string;
   onClick: () => void;
+  title: string;
 };
 
 const BoxJourney: React.FC<BoxJourneyProps> = ({

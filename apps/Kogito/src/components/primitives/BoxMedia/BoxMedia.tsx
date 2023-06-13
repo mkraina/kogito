@@ -1,17 +1,19 @@
 import React from 'react';
-import S from './styles';
-import IconPlay from '../../../assets/icon-play.svg';
-import IconLocked from '../../../assets/icon-locked.svg';
 import DropShadow from 'react-native-drop-shadow';
 
+import IconLocked from '../../../assets/icon-locked.svg';
+import IconPlay from '../../../assets/icon-play.svg';
+
+import S from './styles';
+
 type ContainerProps = {
-  title?: string;
-  subTitle?: string | null;
+  img?: object;
+  isCompleted?: boolean;
   isLocked?: boolean;
   isPlayable?: boolean;
-  isCompleted?: boolean;
-  img?: object;
   onPress?: () => void;
+  subTitle?: string | null;
+  title?: string;
 };
 
 const BoxMedia: React.FC<ContainerProps> = ({
@@ -31,7 +33,7 @@ const BoxMedia: React.FC<ContainerProps> = ({
   return (
     <S.Container disabled={isLocked} onPress={handlePress}>
       <S.Wrapper>
-        <S.Box isLocked={isLocked} isCompleted={isCompleted} img={!!img}>
+        <S.Box img={!!img} isCompleted={isCompleted} isLocked={isLocked}>
           {img && <S.Image source={img} />}
           <S.Headline>
             <S.Title>{title}</S.Title>

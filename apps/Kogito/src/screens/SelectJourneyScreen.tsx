@@ -1,10 +1,11 @@
 import React from 'react';
 import {SafeAreaView} from 'react-native';
-import {useSelectJourney} from '../modules/content/useSelectJourney';
-import JourneyBig from '../components/primitives/JourneyBig';
-import MainContainerWrapper from '../components/container/MainContainerWrapper';
+
 import MainContainer from '../components/container/MainContainer';
+import MainContainerWrapper from '../components/container/MainContainerWrapper';
+import JourneyBig from '../components/primitives/JourneyBig';
 import Text from '../components/primitives/Text';
+import {useSelectJourney} from '../modules/content/useSelectJourney';
 import type {AppScreen} from '../navigation/Navigation';
 
 const SelectJourneyScreen: AppScreen<'SelectJourneyScreen'> = ({
@@ -25,8 +26,8 @@ const SelectJourneyScreen: AppScreen<'SelectJourneyScreen'> = ({
   return (
     <SafeAreaView>
       <MainContainerWrapper>
-        <MainContainer page={'dashboard'} color={'white'}>
-          <MainContainer page={'subWithoutFooter'}>
+        <MainContainer color="white" page="dashboard">
+          <MainContainer page="subWithoutFooter">
             <Text textVariant="bigHeader">Vyberte si svou cestu</Text>
             <JourneyBig
               title="Cesta deprese"

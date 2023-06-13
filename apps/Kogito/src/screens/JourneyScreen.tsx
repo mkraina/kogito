@@ -1,27 +1,31 @@
 import React, {useCallback} from 'react';
 import {SafeAreaView, ScrollView, Text} from 'react-native';
+import type {RouteProp} from '@react-navigation/native';
+import {useFocusEffect, useRoute} from '@react-navigation/native';
+import type {StackNavigationProp} from '@react-navigation/stack/src/types';
+
+import type {Journey} from '../../gql/__generated__/graphql';
 import MainContainer from '../components/container/MainContainer/MainContainer';
-import MainHeader from '../components/container/MainHeader/MainHeader';
 import MainContainerWrapper from '../components/container/MainContainerWrapper';
+import MainHeader from '../components/container/MainHeader/MainHeader';
 import BoxMedia from '../components/primitives/BoxMedia';
-import {ContentItem} from '../modules/content/types';
-import {StackNavigationProp} from '@react-navigation/stack/src/types';
-import {RouteProp, useFocusEffect, useRoute} from '@react-navigation/native';
-import {DashboardStackParamList} from '../navigation/Navigation';
-import {useJourney} from '../modules/content/useJourney';
+import ColoredSafeAreaView from '../components/primitives/ColoredSafeAreaView';
 import Hero from '../components/primitives/Hero/Hero';
 import TabbedBox from '../components/primitives/TabbedBox/TabbedBox';
 import {redirectItem} from '../helpers/redirectItem';
-import ColoredSafeAreaView from '../components/primitives/ColoredSafeAreaView';
+import type {ContentItem} from '../modules/content/types';
+import {useJourney} from '../modules/content/useJourney';
+import type {
+  AppScreen,
+  DashboardStackParamList,
+} from '../navigation/Navigation';
 import useMixPanelTracking from '../tracking/useMixPanelTracking';
-import type {AppScreen} from '../navigation/Navigation';
-import {Journey} from '../../gql/__generated__/graphql';
 
 type Items = {
-  type?: string;
-  level: number;
   items: Omit<ContentItem, 'content'>[];
+  level: number;
   navigation: StackNavigationProp<any, any>;
+  type?: string;
 };
 
 type RoadPhaseNavigationProp = RouteProp<DashboardStackParamList, 'Journey'>;
@@ -43,14 +47,15 @@ const Items: React.FC<Items> = ({type, level, items, navigation}) => {
     <>
       {items.map(item => (
         <BoxMedia
-          title={item.name}
-          subTitle={item.subTitle}
-          onPress={() => trackAndRedirect(item)}
+          key={item.id}
+          isCompleted={(item.progress || 0) >= 80}
+          isLocked={item.locked}
           isPlayable={
             item.__typename === 'AudioItem' || item.__typename === 'VideoItem'
           }
-          isLocked={item.locked}
-          isCompleted={(item.progress || 0) >= 80}
+          subTitle={item.subTitle}
+          title={item.name}
+          onPress={() => trackAndRedirect(item)}
         />
       ))}
     </>
@@ -105,18 +110,18 @@ const JourneyScreen: AppScreen<'Journey'> = ({navigation}) => {
 
   return (
     <ColoredSafeAreaView
+      angle={138}
       color1={colorFirst(journey)}
-      color2={colorSecond(journey)}
-      angle={138}>
+      color2={colorSecond(journey)}>
       <MainContainerWrapper>
         <MainHeader />
-        <MainContainer page={'dashboard'}>
+        <MainContainer page="dashboard">
           <ScrollView showsVerticalScrollIndicator={false}>
             <Hero
+              progress={selectedLevel.progress}
+              state="mainInfo"
               subTitle={`Úroveň ${selectedLevel.level}`}
               title={journey.name}
-              state={'mainInfo'}
-              progress={selectedLevel.progress}
               variant={journey.id === 'Sm91cm5leTox' ? 'depression' : 'anxiety'}
             />
             <TabbedBox
@@ -126,10 +131,10 @@ const JourneyScreen: AppScreen<'Journey'> = ({navigation}) => {
                   id: `${selectedLevel.level}_phase`,
                   render: () => (
                     <Items
-                      type="lesson"
-                      level={selectedLevel.level}
                       items={selectedLevel.phase}
+                      level={selectedLevel.level}
                       navigation={navigation}
+                      type="lesson"
                     />
                   ),
                 },
@@ -138,8 +143,8 @@ const JourneyScreen: AppScreen<'Journey'> = ({navigation}) => {
                   id: `${selectedLevel.level}_tools`,
                   render: () => (
                     <Items
-                      level={selectedLevel.level}
                       items={selectedLevel.tools}
+                      level={selectedLevel.level}
                       navigation={navigation}
                     />
                   ),
@@ -149,10 +154,10 @@ const JourneyScreen: AppScreen<'Journey'> = ({navigation}) => {
                   id: `${selectedLevel.level}_relaxation`,
                   render: () => (
                     <Items
-                      level={selectedLevel.level}
-                      type="relaxation"
                       items={selectedLevel.relaxation}
+                      level={selectedLevel.level}
                       navigation={navigation}
+                      type="relaxation"
                     />
                   ),
                 },
@@ -161,8 +166,8 @@ const JourneyScreen: AppScreen<'Journey'> = ({navigation}) => {
                   id: `${selectedLevel.level}_tasks`,
                   render: () => (
                     <Items
-                      level={selectedLevel.level}
                       items={selectedLevel.tasks}
+                      level={selectedLevel.level}
                       navigation={navigation}
                     />
                   ),

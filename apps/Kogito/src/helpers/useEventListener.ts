@@ -4,7 +4,7 @@ type Callable = (payload: any | null) => void;
 const events: Record<EventName, Callable[]> = {};
 
 const addListener = (event: EventName, callback: Callable) => {
-  if (!events.hasOwnProperty(event)) {
+  if (!events[event]) {
     events[event] = [];
   }
   events[event].push(callback);
@@ -21,7 +21,7 @@ const removeListener = (callback: Callable) => {
 };
 
 const fireEvent = (event: EventName, payload: any | null = null) => {
-  if (events.hasOwnProperty(event)) {
+  if (events[event]) {
     events[event].forEach(callbacks => {
       callbacks(payload);
     });

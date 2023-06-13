@@ -1,32 +1,32 @@
 import React from 'react';
-import S from './styles';
-import ReactNative from 'react-native';
-import Text from '../../primitives/Text';
-import IconClose from '../../../assets/icon-cross.svg';
-
 import Moment from 'react-moment';
+import type ReactNative from 'react-native';
 
-import ResultSatisfied from '../../../assets/emotions/satisfied_result.png';
-import ResultHappy from '../../../assets/emotions/happy_result.png';
-import ResultOkay from '../../../assets/emotions/okay_result.png';
-import ResultSad from '../../../assets/emotions/sad_result.png';
-import ResultVerysad from '../../../assets/emotions/verysad_result.png';
-import EmoticonSatisfied from '../../../assets/emotions/satisfied_big.png';
+import type {Mood} from '../../../../gql/__generated__/graphql';
 import EmoticonHappy from '../../../assets/emotions/happy_big.png';
+import ResultHappy from '../../../assets/emotions/happy_result.png';
 import EmoticonOkay from '../../../assets/emotions/okay_big.png';
+import ResultOkay from '../../../assets/emotions/okay_result.png';
 import EmoticonSad from '../../../assets/emotions/sad_big.png';
+import ResultSad from '../../../assets/emotions/sad_result.png';
+import EmoticonSatisfied from '../../../assets/emotions/satisfied_big.png';
+import ResultSatisfied from '../../../assets/emotions/satisfied_result.png';
 import EmoticonVerysad from '../../../assets/emotions/verysad_big.png';
-import {Mood} from '../../../../gql/__generated__/graphql';
+import ResultVerysad from '../../../assets/emotions/verysad_result.png';
+import IconClose from '../../../assets/icon-cross.svg';
+import Text from '../../primitives/Text';
+
+import S from './styles';
 
 type HalfOverlayProps = {
-  close?: () => void;
   type: Mood;
+  close?: () => void;
 } & ReactNative.ModalProperties;
 
 type Settings = {
-  title: string;
   icon: number;
   iconBig: number;
+  title: string;
 };
 
 const getSettings = (type: HalfOverlayProps['type']): Settings => {
@@ -81,7 +81,7 @@ const ModalEmoticon: React.FC<HalfOverlayProps> = ({
           <S.EmoticonBg source={settings.icon} />
           <S.EmoticonContent>
             <S.EmoticonImage source={settings.iconBig} />
-            <Text textVariant={'bigHeader'} align={'center'}>
+            <Text align="center" textVariant="bigHeader">
               {settings.title}
             </Text>
             <Moment element={Text}>{new Date()}</Moment>

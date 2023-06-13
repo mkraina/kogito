@@ -1,6 +1,7 @@
-import {gql, useMutation} from '@apollo/client';
 import {useCallback} from 'react';
-import {
+import {gql, useMutation} from '@apollo/client';
+
+import type {
   UpdateQuestionnaireMutation,
   UpdateQuestionnaireMutationVariables,
   UserAnswer,

@@ -1,5 +1,6 @@
 import {gql, useQuery} from '@apollo/client';
-import {
+
+import type {
   ContentQueryQuery,
   ContentQueryQueryVariables,
 } from '../../../gql/__generated__/graphql';
@@ -92,7 +93,7 @@ export const useContent = () => {
       newestStory: data.content.stories[0],
       currentRelaxation: data.content.currentRelaxation,
       bonusRelaxation: data.content.bonusRelaxation,
-      currentUserJourneyLevel: currentUserJourneyLevel,
+      currentUserJourneyLevel,
       todaySchedule: data.content.todaySchedule,
       journeyRelaxation: data.content.journeyRelaxation,
       refetch,

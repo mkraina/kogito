@@ -1,5 +1,7 @@
-import React, {ReactElement} from 'react';
-import {Wrapper, PullRight, Left, Line, Spacer} from './styles';
+import type {ReactElement} from 'react';
+import React from 'react';
+
+import {Left, Line, PullRight, Spacer, Wrapper} from './styles';
 
 type ChapterHeader = {
   left: ReactElement;

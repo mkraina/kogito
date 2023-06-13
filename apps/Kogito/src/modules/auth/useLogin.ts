@@ -1,10 +1,11 @@
-import {
+import {gql, useMutation} from '@apollo/client';
+
+import type {
   InitLoginMutation,
   InitLoginMutationVariables,
   LoginMutation,
   LoginMutationVariables,
 } from '../../../gql/__generated__/graphql';
-import {gql, useMutation} from '@apollo/client';
 
 const LoginAction = gql`
   mutation login($input: LoginInput!) {

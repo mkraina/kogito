@@ -1,19 +1,21 @@
 import React, {useCallback} from 'react';
 import {ScrollView, View} from 'react-native';
-import MainContainer from '../components/container/MainContainer';
-import Text from '../components/primitives/Text';
-import {useUserQuestionnairesQuery} from '../modules/questionnaire/useUserQuestionnairesQuery';
-import QuestionnaireWidget from '../modules/questionnaire/components/QuestionnaireWidget';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import Button from '../components/primitives/Button';
+
+import MainContainer from '../components/container/MainContainer';
 import MainContainerWrapper from '../components/container/MainContainerWrapper';
-import {useMeQuery} from '../modules/user/useMeQuery';
+import Button from '../components/primitives/Button';
 import ColoredSafeAreaView from '../components/primitives/ColoredSafeAreaView';
+import Text from '../components/primitives/Text';
+import QuestionnaireWidget from '../modules/questionnaire/components/QuestionnaireWidget';
+import {useUserQuestionnairesQuery} from '../modules/questionnaire/useUserQuestionnairesQuery';
+import {useMeQuery} from '../modules/user/useMeQuery';
 
 const AvailableQuestionnairesScreen: React.FC = () => {
   const navigation = useNavigation();
   const {userQuestionnaires, userState, loading, refetch} =
     useUserQuestionnairesQuery();
+  // eslint-disable-next-line no-empty-pattern
   const {} = useMeQuery();
 
   useFocusEffect(
@@ -39,28 +41,28 @@ const AvailableQuestionnairesScreen: React.FC = () => {
 
             <View style={{marginTop: 15, width: '100%'}}>
               <QuestionnaireWidget
+                count={10}
+                finished={!!userState?.userInfoCompleted}
+                name="Základní údaje"
                 press={() =>
                   !userState?.userInfoCompleted &&
                   navigation.navigate('FinishRegistrationScreen')
                 }
-                name="Základní údaje"
-                finished={!!userState?.userInfoCompleted}
-                count={10}
               />
 
               {userQuestionnaires &&
                 userQuestionnaires.map(item => (
                   <QuestionnaireWidget
                     key={item.id}
+                    count={item.questionnaire.questionCount}
+                    finished={item.finished}
+                    name={item.questionnaire.name}
                     press={() =>
                       !item.finished &&
                       navigation.navigate('QuestionnaireScreen', {
                         id: item.id,
                       })
                     }
-                    name={item.questionnaire.name}
-                    finished={item.finished}
-                    count={item.questionnaire.questionCount}
                   />
                 ))}
             </View>
@@ -69,11 +71,11 @@ const AvailableQuestionnairesScreen: React.FC = () => {
             </Text>
             {allFinished && (
               <Button
-                title="Dokončit"
-                onPress={() => navigation.navigate('QuestionnaireResultScreen')}
                 style={{
                   marginTop: 14,
                 }}
+                title="Dokončit"
+                onPress={() => navigation.navigate('QuestionnaireResultScreen')}
               />
             )}
             {/*<Button*/}

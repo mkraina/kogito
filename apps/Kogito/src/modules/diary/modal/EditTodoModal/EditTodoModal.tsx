@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import Modal from '../../../../components/container/Modal/Modal';
-import Text from '../../../../components/primitives/Text';
-import Button from '../../../../components/primitives/Button';
-import TextInput from '../../../../components/form/TextInput';
 import {View} from 'react-native';
 
+import Modal from '../../../../components/container/Modal/Modal';
+import TextInput from '../../../../components/form/TextInput';
+import Button from '../../../../components/primitives/Button';
+import Text from '../../../../components/primitives/Text';
+
 type EditTodoModal = {
-  initText: string;
-  save: (value: string) => void;
   close: () => void;
+  initText: string;
   remove: () => void;
+  save: (value: string) => void;
 };
 
 const EditViciousCircleModal: React.FC<EditTodoModal> = ({
@@ -26,15 +27,15 @@ const EditViciousCircleModal: React.FC<EditTodoModal> = ({
 
   return (
     <Modal close={() => close()}>
-      <Text textVariant="bigHeader" align={'center'}>
+      <Text align="center" textVariant="bigHeader">
         Můj úkol
       </Text>
       <TextInput
-        value={text}
-        onChangeText={val => setText(val)}
         style={{
           marginVertical: 32,
         }}
+        value={text}
+        onChangeText={val => setText(val)}
       />
       <View
         style={{
@@ -42,12 +43,12 @@ const EditViciousCircleModal: React.FC<EditTodoModal> = ({
           justifyContent: 'space-between',
         }}>
         <Button
-          onPress={() => remove()}
+          colorVariant="transparentBlack"
           title="Zahodit"
-          colorVariant={'transparentBlack'}
-          type={'small'}
+          type="small"
+          onPress={() => remove()}
         />
-        <Button onPress={() => save(text)} title="Uložit" type={'small'} />
+        <Button title="Uložit" type="small" onPress={() => save(text)} />
       </View>
     </Modal>
   );

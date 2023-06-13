@@ -1,20 +1,23 @@
 import React, {useEffect, useState} from 'react';
-import Modal from '../../../../components/container/Modal/Modal';
-import {useLogMood} from '../../useLogMood';
-import useEventListener from '../../../../helpers/useEventListener';
-import Text from '../../../../components/primitives/Text';
-import ButtonIcon from '../../../../components/primitives/ButtonIcon';
 import {Image} from 'react-native';
-import EmoticonSatisfied from '../../../../assets/emotions/satisfied.png';
+
+import type {Mood} from '../../../../../gql/__generated__/graphql';
 import EmoticoedHappy from '../../../../assets/emotions/happy.png';
 import EmoticonOkay from '../../../../assets/emotions/okay.png';
 import EmoticonSad from '../../../../assets/emotions/sad.png';
+import EmoticonSatisfied from '../../../../assets/emotions/satisfied.png';
 import EmoticonVerysad from '../../../../assets/emotions/verysad.png';
-import S from './styles';
+import Modal from '../../../../components/container/Modal/Modal';
 import ModalEmoticon from '../../../../components/container/ModalEmoticon/ModalEmoticon';
+import ButtonIcon from '../../../../components/primitives/ButtonIcon';
+import Text from '../../../../components/primitives/Text';
+import useEventListener from '../../../../helpers/useEventListener';
 import useMixPanelTracking from '../../../../tracking/useMixPanelTracking';
-import {Mood} from '../../../../../gql/__generated__/graphql';
+import {useLogMood} from '../../useLogMood';
 
+import S from './styles';
+
+// eslint-disable-next-line max-lines-per-function, max-statements
 const LogMoodModal: React.FC = () => {
   const logMoodMutation = useLogMood();
   const [visibility, setVisibility] = useState(false);
@@ -71,12 +74,13 @@ const LogMoodModal: React.FC = () => {
   }, []);
 
   if (visibility) {
+    // eslint-disable-next-line no-negated-condition
     return !showResult ? (
       <Modal close={() => setVisibility(false)}>
-        <Text textVariant={'bigHeader'} align={'center'}>
+        <Text align="center" textVariant="bigHeader">
           Jak se cítíte?
         </Text>
-        <Text textVariant={'textMini'} align={'center'}>
+        <Text align="center" textVariant="textMini">
           Zaznamejte svou náladu
         </Text>
         <S.EmoticonWrapper>
@@ -108,10 +112,10 @@ const LogMoodModal: React.FC = () => {
         </S.EmoticonWrapper>
       </Modal>
     ) : (
-      <ModalEmoticon type={showResult} close={handleClose} />
+      <ModalEmoticon close={handleClose} type={showResult} />
     );
   } else {
-    return <></>;
+    return null;
   }
 };
 

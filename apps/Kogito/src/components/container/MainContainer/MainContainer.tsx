@@ -1,6 +1,7 @@
 import React from 'react';
+import type {ViewProps} from 'react-native';
+
 import {Container} from './styles';
-import {ViewProps} from 'react-native';
 
 export type Align = 'center' | 'left' | 'right' | 'between';
 export type AlignVertical = 'center' | 'bottom' | 'between';
@@ -10,8 +11,8 @@ export type Color = 'white' | 'main';
 type MainContainerProps = ViewProps & {
   align?: Align;
   alignVertical?: AlignVertical;
-  page?: Page;
   color?: Color;
+  page?: Page;
 };
 
 const MainContainer: React.FC<MainContainerProps> = ({
@@ -26,8 +27,8 @@ const MainContainer: React.FC<MainContainerProps> = ({
     <Container
       align={align}
       alignVertical={alignVertical}
-      page={page}
       color={color}
+      page={page}
       {...rest}>
       {children}
     </Container>

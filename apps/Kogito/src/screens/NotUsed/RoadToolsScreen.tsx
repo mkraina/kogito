@@ -1,20 +1,21 @@
 import React from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
+
 import MainContainer from '../../components/container/MainContainer';
-import MainHeader from '../../components/container/MainHeader/MainHeader';
 import MainContainerWrapper from '../../components/container/MainContainerWrapper';
-import Hero from '../../components/primitives/Hero';
+import MainHeader from '../../components/container/MainHeader/MainHeader';
 import GradientBackground from '../../components/primitives/GradientBackground';
+import Hero from '../../components/primitives/Hero';
 
 const RoadToolsScreen: React.FC = () => {
   return (
     <SafeAreaView>
-      <GradientBackground color1={'#ffd1a0'} color2={'#ffdfdf'} angle={138}>
+      <GradientBackground angle={138} color1="#ffd1a0" color2="#ffdfdf">
         <MainContainerWrapper>
           <MainHeader />
-          <MainContainer page={'dashboard'}>
+          <MainContainer page="dashboard">
             <ScrollView showsVerticalScrollIndicator={false}>
-              <Hero state={'mainInfo'} />
+              <Hero state="mainInfo" />
               {/*<BoxMediaWrapper>*/}
               {/*  <RoadNavigation active={'tools'} />*/}
 

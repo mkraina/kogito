@@ -1,6 +1,8 @@
 import React from 'react';
+import type ReactNative from 'react-native';
+import {TouchableWithoutFeedback} from 'react-native';
+
 import S from './styles';
-import ReactNative, {TouchableWithoutFeedback} from 'react-native';
 
 type HalfOverlayProps = {
   close: () => void | undefined;

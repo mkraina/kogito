@@ -1,5 +1,6 @@
+import type {MixpanelProperties} from 'mixpanel-react-native';
+
 import {useMixPanelTrackingContext} from './MixPanelTracking';
-import {MixpanelProperties} from 'mixpanel-react-native';
 
 const useMixPanelTracking = () => {
   const mixPanel = useMixPanelTrackingContext();

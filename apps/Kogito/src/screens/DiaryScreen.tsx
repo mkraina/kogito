@@ -1,17 +1,18 @@
 import React, {useCallback, useMemo} from 'react';
-import {SafeAreaView, ScrollView, Alert} from 'react-native';
-import MainContainer from '../components/container/MainContainer/MainContainer';
-import MainHeader from '../components/container/MainHeader/MainHeader';
-import MainContainerWrapper from '../components/container/MainContainerWrapper';
-import Text from '../components/primitives/Text';
-import DayInfoBox from '../components/primitives/DayInfoBox';
-import {useDiaryList} from '../modules/diary/useDiaryList';
-import {groupBy, capitalize} from 'lodash';
-import moment from 'moment';
+import {Alert, SafeAreaView, ScrollView} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
+import {capitalize, groupBy} from 'lodash';
+import moment from 'moment';
+
+import MainContainer from '../components/container/MainContainer/MainContainer';
+import MainContainerWrapper from '../components/container/MainContainerWrapper';
+import MainHeader from '../components/container/MainHeader/MainHeader';
+import DayInfoBox from '../components/primitives/DayInfoBox';
+import Text from '../components/primitives/Text';
 import {useDiaryEntry} from '../modules/diary/useDiaryEntry';
-import useMixPanelTracking from '../tracking/useMixPanelTracking';
+import {useDiaryList} from '../modules/diary/useDiaryList';
 import type {AppScreen} from '../navigation/Navigation';
+import useMixPanelTracking from '../tracking/useMixPanelTracking';
 
 const DiaryScreen: AppScreen<'Diary'> = ({navigation}) => {
   const {records, refetch} = useDiaryList();
@@ -73,36 +74,34 @@ const DiaryScreen: AppScreen<'Diary'> = ({navigation}) => {
       <MainContainerWrapper>
         <MainHeader />
         <ScrollView contentContainerStyle={{flexGrow: 1}}>
-          <MainContainer page={'dashboard'} color={'white'}>
+          <MainContainer color="white" page="dashboard">
             <Text
-              textVariant={'bigHeader'}
-              onPressPlus={() => navigation.navigate('DiaryEdit', {id: null})}
-              space={'main'}>
+              space="main"
+              textVariant="bigHeader"
+              onPressPlus={() => navigation.navigate('DiaryEdit', {id: null})}>
               Deník
             </Text>
 
             {groupedRecords.map(item => (
-              <>
-                <Text
-                  textVariant={'headerSub2'}
-                  colorVariant={'gray'}
-                  space={'main'}>
+              <React.Fragment key={item.title}>
+                <Text colorVariant="gray" space="main" textVariant="headerSub2">
                   {item.title}
                 </Text>
                 {item.items.map(entry => {
                   const date = new Date(entry.date);
                   return (
                     <DayInfoBox
+                      key={entry.id}
                       date={date}
                       title={entry.previewText}
+                      onLongPress={() => handleLongPress(entry.id)}
                       onPress={() =>
                         navigation.navigate('DiaryEdit', {id: entry.id})
                       }
-                      onLongPress={() => handleLongPress(entry.id)}
                     />
                   );
                 })}
-              </>
+              </React.Fragment>
             ))}
           </MainContainer>
         </ScrollView>

@@ -1,10 +1,11 @@
 import React from 'react';
-import {useForm, Controller} from 'react-hook-form';
-import Button from '../../../components/primitives/Button';
+import {Controller, useForm} from 'react-hook-form';
+
+import type {EditProfileInput} from '../../../../gql/__generated__/graphql';
 import TextInput from '../../../components/form/TextInput';
-import {useMeQuery} from '../useMeQuery';
+import Button from '../../../components/primitives/Button';
 import {useEditProfile} from '../useEditProfile';
-import {EditProfileInput} from '../../../../gql/__generated__/graphql';
+import {useMeQuery} from '../useMeQuery';
 
 type ProfileSettingsForm = {
   onSuccess?: () => void;
@@ -41,37 +42,37 @@ const ProfileSettingsForm: React.FC<ProfileSettingsForm> = ({
     <>
       <Controller
         control={control}
+        name="firstName"
         render={({field: {onChange, onBlur, value}}) => (
           <TextInput
             placeholder="Jméno"
-            onBlur={onBlur}
             style={{marginTop: 16, marginBottom: 6}}
-            onChangeText={value => onChange(value)}
             value={value}
+            onBlur={onBlur}
+            onChangeText={value => onChange(value)}
           />
         )}
-        name="firstName"
         rules={{required: true}}
       />
       <Controller
         control={control}
+        name="lastName"
         render={({field: {onChange, onBlur, value}}) => (
           <TextInput
             placeholder="Příjmení"
-            onBlur={onBlur}
             style={{marginTop: 6, marginBottom: 12}}
-            onChangeText={value => onChange(value)}
             value={value}
+            onBlur={onBlur}
+            onChangeText={value => onChange(value)}
           />
         )}
-        name="lastName"
         rules={{required: true}}
       />
       <Button
+        style={{marginBottom: 24}}
         title="Uložit"
         type="medium"
         onPress={handleSubmit(onSubmit)}
-        style={{marginBottom: 24}}
       />
     </>
   );

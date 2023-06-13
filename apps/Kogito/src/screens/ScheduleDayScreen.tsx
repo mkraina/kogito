@@ -1,14 +1,15 @@
 import React, {useCallback} from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
+
 import MainContainer from '../components/container/MainContainer/MainContainer';
-import MainHeader from '../components/container/MainHeader/MainHeader';
 import MainContainerWrapper from '../components/container/MainContainerWrapper';
-import Text from '../components/primitives/Text';
+import MainHeader from '../components/container/MainHeader/MainHeader';
 import BoxCheckbox from '../components/primitives/BoxCheckbox';
+import Text from '../components/primitives/Text';
 import {useContent} from '../modules/content/useContent';
 import {useTrackSchedule} from '../modules/content/useTrackSchedule';
 import useMixPanelTracking from '../tracking/useMixPanelTracking';
-import {useFocusEffect} from '@react-navigation/native';
 
 const ScheduleDayScreen: React.FC = () => {
   const {todaySchedule} = useContent();
@@ -42,20 +43,20 @@ const ScheduleDayScreen: React.FC = () => {
       <MainContainerWrapper>
         <MainHeader />
         <ScrollView contentContainerStyle={{flexGrow: 1}}>
-          <MainContainer page={'subWithoutFooter'} color={'white'}>
-            <Text textVariant={'bigHeader'} add={true}>
+          <MainContainer color="white" page="subWithoutFooter">
+            <Text add={true} textVariant="bigHeader">
               Plán dne
             </Text>
 
-            <Text textVariant={'headerSub2'} colorVariant={'gray'} />
-            {todaySchedule &&
-              todaySchedule.morning.map(item => (
-                <BoxCheckbox
-                  title={item.name}
-                  checked={item.completed}
-                  onChange={value => handleChange(item.id, value)}
-                />
-              ))}
+            <Text colorVariant="gray" textVariant="headerSub2" />
+            {todaySchedule?.morning.map(item => (
+              <BoxCheckbox
+                key={item.id}
+                checked={item.completed}
+                title={item.name}
+                onChange={value => handleChange(item.id, value)}
+              />
+            ))}
 
             {/*<Text textVariant={'headerSub2'} colorVariant={'gray'}>*/}
             {/*  Odpoledne*/}

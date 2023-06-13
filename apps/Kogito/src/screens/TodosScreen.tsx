@@ -1,30 +1,31 @@
 import React, {useCallback, useState} from 'react';
 import {Alert, SafeAreaView, ScrollView} from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
+
+import type {DayPart, Todo} from '../../gql/__generated__/graphql';
+import MainContainer from '../components/container/MainContainer';
 import MainContainerWrapper from '../components/container/MainContainerWrapper';
 import MainHeader from '../components/container/MainHeader';
-import Text from '../components/primitives/Text';
-import MainContainer from '../components/container/MainContainer';
-import {useTodos} from '../modules/diary/useTodos';
 import BoxAdd from '../components/primitives/BoxAdd';
-import EditTodoModal from '../modules/diary/modal/EditTodoModal/EditTodoModal';
 import BoxCheckbox from '../components/primitives/BoxCheckbox';
+import Text from '../components/primitives/Text';
+import EditTodoModal from '../modules/diary/modal/EditTodoModal/EditTodoModal';
+import {useTodos} from '../modules/diary/useTodos';
 import useMixPanelTracking from '../tracking/useMixPanelTracking';
-import {useFocusEffect} from '@react-navigation/native';
-import {DayPart, Todo} from '../../gql/__generated__/graphql';
 
 type EditorSettings = {
-  id: string | null;
   dayPart: DayPart;
+  id: string | null;
   title: string;
 };
 
 type DayPartRender = {
-  title: string;
   dayPart: DayPart;
-  todos: Todo[];
   handleCheck: (id: string, checked: boolean) => void;
   handleLongClick: (id: string) => void;
   setEditor: (settings: EditorSettings) => void;
+  title: string;
+  todos: Todo[];
 };
 
 const DayPartRender: React.FC<DayPartRender> = ({
@@ -37,23 +38,21 @@ const DayPartRender: React.FC<DayPartRender> = ({
 }) => {
   return (
     <>
-      <Text textVariant={'headerSub2'} colorVariant={'gray'}>
+      <Text colorVariant="gray" textVariant="headerSub2">
         {title}
       </Text>
-      {todos &&
-        todos
-          .filter(todo => todo.dayPart === dayPart)
-          .map(todo => (
-            <BoxCheckbox
-              title={todo.title}
-              checked={todo.checked}
-              onChange={value => handleCheck(todo.id, value)}
-              onLongPress={() => handleLongClick(todo.id)}
-            />
-          ))}
-      <BoxAdd
-        onPress={() => setEditor({id: null, title: '', dayPart: dayPart})}
-      />
+      {todos
+        .filter(todo => todo.dayPart === dayPart)
+        .map(todo => (
+          <BoxCheckbox
+            key={todo.id}
+            checked={todo.checked}
+            title={todo.title}
+            onChange={value => handleCheck(todo.id, value)}
+            onLongPress={() => handleLongClick(todo.id)}
+          />
+        ))}
+      <BoxAdd onPress={() => setEditor({id: null, title: '', dayPart})} />
     </>
   );
 };
@@ -73,7 +72,7 @@ const TodosScreen: React.FC = () => {
       await saveTodo({
         id: editor.id,
         dayPart: editor.dayPart,
-        title: title,
+        title,
       });
       setEditor(null);
       trackTodoCreated();
@@ -130,42 +129,42 @@ const TodosScreen: React.FC = () => {
       <MainContainerWrapper>
         <MainHeader />
         <ScrollView contentContainerStyle={{flexGrow: 1}}>
-          <MainContainer page={'subWithoutFooter'} color={'white'}>
-            <Text textVariant={'bigHeader'} add={true}>
+          <MainContainer color="white" page="subWithoutFooter">
+            <Text add={true} textVariant="bigHeader">
               Plánovač
             </Text>
 
             <DayPartRender
-              title="Ráno"
               dayPart="MORNING"
-              todos={todos}
               handleCheck={handleCheck}
               handleLongClick={handleLongPress}
               setEditor={setEditor}
+              title="Ráno"
+              todos={todos}
             />
             <DayPartRender
-              title="Odpoledne"
               dayPart="AFTERNOON"
-              todos={todos}
               handleCheck={handleCheck}
               handleLongClick={handleLongPress}
               setEditor={setEditor}
+              title="Odpoledne"
+              todos={todos}
             />
             <DayPartRender
-              title="Večer"
               dayPart="EVENING"
-              todos={todos}
               handleCheck={handleCheck}
               handleLongClick={handleLongPress}
               setEditor={setEditor}
+              title="Večer"
+              todos={todos}
             />
 
             {editor && (
               <EditTodoModal
-                initText={''}
-                save={handleItemSave}
                 close={() => setEditor(null)}
+                initText=""
                 remove={handleItemRemove}
+                save={handleItemSave}
               />
             )}
           </MainContainer>

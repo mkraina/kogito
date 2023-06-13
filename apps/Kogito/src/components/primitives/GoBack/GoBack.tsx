@@ -1,7 +1,9 @@
 import React from 'react';
-import Icon from '../../../assets/icon-chevron-left.svg';
-import S from './styles';
 import {useNavigation} from '@react-navigation/native';
+
+import Icon from '../../../assets/icon-chevron-left.svg';
+
+import S from './styles';
 
 type ContainerProps = {
   title: string;
@@ -23,7 +25,7 @@ const GoBack: React.FC<ContainerProps> = ({
   return (
     <S.Container {...rest} onPress={handlePress}>
       <S.Wrapper>
-        <Icon color={'#1c1c1c'} />
+        <Icon color="#1c1c1c" />
         <S.Text>{title}</S.Text>
       </S.Wrapper>
     </S.Container>

@@ -1,25 +1,25 @@
 import React, {useCallback, useRef} from 'react';
 import {ScrollView, TouchableOpacity, View} from 'react-native';
-import MainContainer from '../components/container/MainContainer/MainContainer';
-import MainHeader from '../components/container/MainHeader/MainHeader';
-import MainContainerWrapper from '../components/container/MainContainerWrapper';
-import Hero from '../components/primitives/Hero';
-import LevelWidget, {
-  LevelWidgetVariant,
-} from '../components/primitives/LevelWidget';
-import {useContent} from '../modules/content/useContent';
 import {useFocusEffect} from '@react-navigation/native';
+
+import type {Journey} from '../../gql/__generated__/graphql';
+import MainContainer from '../components/container/MainContainer/MainContainer';
+import MainContainerWrapper from '../components/container/MainContainerWrapper';
+import MainHeader from '../components/container/MainHeader/MainHeader';
 import ColoredSafeAreaView from '../components/primitives/ColoredSafeAreaView';
+import Hero from '../components/primitives/Hero';
+import type {LevelWidgetVariant} from '../components/primitives/LevelWidget';
+import LevelWidget from '../components/primitives/LevelWidget';
 import Text from '../components/primitives/Text';
+import {useContent} from '../modules/content/useContent';
 import type {AppScreen} from '../navigation/Navigation';
-import {Journey} from '../../gql/__generated__/graphql';
 
 const solveState = (
   unlocked: boolean,
   progress: number,
 ): LevelWidgetVariant => {
   if (unlocked) {
-    return progress !== 100 ? 'inProgress' : 'done';
+    return progress === 100 ? 'done' : 'inProgress';
   }
 
   return 'locked';
@@ -52,29 +52,30 @@ const JourneyProgressScreen: AppScreen<'JourneyProgress'> = ({navigation}) => {
 
   return (
     <ColoredSafeAreaView
+      angle={138}
       color1={colorFirst(userJourney)}
-      color2={colorSecond(userJourney)}
-      angle={138}>
+      color2={colorSecond(userJourney)}>
       <MainContainerWrapper>
         <MainHeader useTransparent={true} />
-        <MainContainer page={'dashboard'}>
+        <MainContainer page="dashboard">
           {userJourney && (
             <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
               <Hero
+                state="onlyHeadline"
                 title={userJourney.name}
-                state={'onlyHeadline'}
                 variant={
                   userJourney.id === 'Sm91cm5leTox' ? 'depression' : 'anxiety'
                 }
               />
-              <MainContainer page={'sub'}>
+              <MainContainer page="sub">
                 <View>
                   {userJourney.levels.map(level => {
                     return (
                       <LevelWidget
+                        key={level.id}
                         name={`Úroveň ${level.level}`}
-                        state={solveState(level.unlocked, level.progress)}
                         progress={level.progress}
+                        state={solveState(level.unlocked, level.progress)}
                         onPress={() =>
                           navigation.navigate('Journey', {
                             id: userJourney.id,

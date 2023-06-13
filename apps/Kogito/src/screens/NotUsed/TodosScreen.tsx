@@ -1,30 +1,31 @@
 import React from 'react';
 import {SafeAreaView, Text} from 'react-native';
+
 import MainContainer from '../../components/container/MainContainer/MainContainer';
-import MainHeader from '../../components/container/MainHeader/MainHeader';
 import MainContainerWrapper from '../../components/container/MainContainerWrapper';
+import MainHeader from '../../components/container/MainHeader/MainHeader';
+import BoxCheckbox from '../../components/primitives/BoxCheckbox/BoxCheckbox';
+import BoxMediaWrapper from '../../components/primitives/BoxMediaWrapper/BoxMediaWrapper';
 import GradientBackground from '../../components/primitives/GradientBackground';
 import Hero from '../../components/primitives/Hero/Hero';
-import BoxMediaWrapper from '../../components/primitives/BoxMediaWrapper/BoxMediaWrapper';
 import RoadNavigation from '../../components/primitives/RoadNavigation/RoadNavigation';
-import BoxCheckbox from '../../components/primitives/BoxCheckbox/BoxCheckbox';
 
 const TodosScreen: React.FC = () => {
   return (
     <SafeAreaView>
-      <GradientBackground color1={'#ffd1a0'} color2={'#ffdfdf'} angle={138}>
+      <GradientBackground angle={138} color1="#ffd1a0" color2="#ffdfdf">
         <MainContainerWrapper>
           <MainHeader />
-          <MainContainer page={'dashboard'}>
+          <MainContainer page="dashboard">
             <Text>Todos</Text>
-            <Hero state={'mainInfo'} />
+            <Hero state="mainInfo" />
             <BoxMediaWrapper>
-              <RoadNavigation active={'todos'} />
+              <RoadNavigation active="todos" />
 
-              <BoxCheckbox title={'Plánuj své aktivity'} checked={true} />
-              <BoxCheckbox title={'Zaznamenávej si svůj stav'} />
-              <BoxCheckbox title={'Zapisuj si myšlenky a pocity'} />
-              <BoxCheckbox title={'Relaxuj'} />
+              <BoxCheckbox checked={true} title="Plánuj své aktivity" />
+              <BoxCheckbox title="Zaznamenávej si svůj stav" />
+              <BoxCheckbox title="Zapisuj si myšlenky a pocity" />
+              <BoxCheckbox title="Relaxuj" />
             </BoxMediaWrapper>
           </MainContainer>
         </MainContainerWrapper>

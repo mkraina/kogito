@@ -1,13 +1,14 @@
 import React from 'react';
-import {Wrapper, Barrier, ProgressLine} from './styles';
+
+import {Barrier, ProgressLine, Wrapper} from './styles';
 
 export type ProgressBarVariants = 'small' | 'level' | null;
 
 type ProgressBar = {
-  min?: number;
-  max?: number;
-  progressBarVariants?: ProgressBarVariants;
   value: number;
+  max?: number;
+  min?: number;
+  progressBarVariants?: ProgressBarVariants;
 };
 
 const ProgressBar: React.FC<ProgressBar> = ({

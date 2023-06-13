@@ -1,15 +1,17 @@
 import React from 'react';
-import {Container, ContainerInner, Title} from './styles';
-import Button from '../Button';
 import {View} from 'react-native';
+
 import HeroAnxiety from '../../../assets/anxiety/hero.svg';
 import HeroDepression from '../../../assets/depression/hero.svg';
+import Button from '../Button';
+
+import {Container, ContainerInner, Title} from './styles';
 
 export type ImageVariant = 'depression' | 'anxiety';
 type BoxBigProps = {
   title: string;
-  onPress?: () => void;
   variant: ImageVariant;
+  onPress?: () => void;
 };
 
 const JourneyBig: React.FC<BoxBigProps> = ({
@@ -41,10 +43,10 @@ const JourneyBig: React.FC<BoxBigProps> = ({
         <Title>{title}</Title>
         <View>
           <Button
+            colorVariant="red"
+            title="Zvolit"
+            type="small"
             onPress={onPress}
-            title={'Zvolit'}
-            colorVariant={'red'}
-            type={'small'}
           />
         </View>
       </ContainerInner>

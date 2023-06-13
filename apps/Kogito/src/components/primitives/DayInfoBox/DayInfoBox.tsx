@@ -1,12 +1,13 @@
 import React from 'react';
-import S from './styles';
 import {TouchableWithoutFeedback} from 'react-native';
+
+import S from './styles';
 
 type ContainerProps = {
   date: Date;
-  title?: string;
-  onPress?: () => void;
   onLongPress?: () => void;
+  onPress?: () => void;
+  title?: string;
 };
 
 const toDayString = (day: number): string => {
@@ -37,7 +38,7 @@ const DayInfoBox: React.FC<ContainerProps> = ({
   onLongPress = () => {},
 }) => {
   return (
-    <TouchableWithoutFeedback onPress={onPress} onLongPress={onLongPress}>
+    <TouchableWithoutFeedback onLongPress={onLongPress} onPress={onPress}>
       <S.Container>
         <S.Wrapper>
           <S.DayBox>

@@ -1,10 +1,11 @@
 import React from 'react';
-import S from './styles';
 import {TouchableWithoutFeedback} from 'react-native';
 
+import S from './styles';
+
 type DetailViciousCircleModal = {
-  items: string[];
   close: () => void;
+  items: string[];
   onPressItem: (index?: number, text?: string) => void;
 };
 
@@ -23,7 +24,7 @@ const DetailViciousCircleModal: React.FC<DetailViciousCircleModal> = ({
         <S.ContainerInner>
           <S.ItemContainer>
             {items.map((item, index) => (
-              <S.ItemWrapper>
+              <S.ItemWrapper key={item}>
                 <S.Item onPress={() => onPressItem(index, item)}>{item}</S.Item>
               </S.ItemWrapper>
             ))}

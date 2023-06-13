@@ -6,27 +6,28 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import MainContainer from '../components/container/MainContainer/MainContainer';
-import MainHeader from '../components/container/MainHeader/MainHeader';
-import MainContainerWrapper from '../components/container/MainContainerWrapper';
-import Text from '../components/primitives/Text';
-import GradientBackground from '../components/primitives/GradientBackground';
-import AudioControls from '../components/primitives/AudioControls';
 import DropShadow from 'react-native-drop-shadow';
-import SoundPlayer from 'react-native-sound-player';
-import {RootStackParamList} from '../navigation/Navigation';
-import {RouteProp, useRoute} from '@react-navigation/native';
-import {useItemContent} from '../modules/content/useItemContent';
-import {secondsToTime} from '../helpers/secondsToTime';
-import {useTrackProgress} from '../modules/content/useTrackProgress';
-import Slider from '../components/primitives/Slider';
-import useEventListener from '../helpers/useEventListener';
 import HTML from 'react-native-render-html';
-import images from '../helpers/images';
+import SoundPlayer from 'react-native-sound-player';
+import type {RouteProp} from '@react-navigation/native';
+import {useRoute} from '@react-navigation/native';
+
+import MainContainer from '../components/container/MainContainer/MainContainer';
+import MainContainerWrapper from '../components/container/MainContainerWrapper';
+import MainHeader from '../components/container/MainHeader/MainHeader';
 import Modal from '../components/container/Modal/Modal';
+import AudioControls from '../components/primitives/AudioControls';
 import Button from '../components/primitives/Button';
+import GradientBackground from '../components/primitives/GradientBackground';
+import Slider from '../components/primitives/Slider';
+import Text from '../components/primitives/Text';
+import images from '../helpers/images';
+import {secondsToTime} from '../helpers/secondsToTime';
+import useEventListener from '../helpers/useEventListener';
+import {useItemContent} from '../modules/content/useItemContent';
+import {useTrackProgress} from '../modules/content/useTrackProgress';
+import type {AppScreen, RootStackParamList} from '../navigation/Navigation';
 import useMixPanelTracking from '../tracking/useMixPanelTracking';
-import type {AppScreen} from '../navigation/Navigation';
 
 export type AudioScreenProps = RouteProp<RootStackParamList, 'Audio'>;
 
@@ -216,16 +217,13 @@ const AudioScreen: AppScreen<'Audio'> = ({navigation}) => {
           backgroundColor: '#fff',
         }}>
         <GradientBackground
-          color1={'rgba(255,255,255,0.29)'}
-          color2={'rgba(255,231,231,0.29)'}
-          angle={180}>
+          angle={180}
+          color1="rgba(255,255,255,0.29)"
+          color2="rgba(255,231,231,0.29)">
           <MainContainerWrapper>
             <MainHeader />
 
-            <MainContainer
-              align={'center'}
-              page={'sub'}
-              alignVertical={'center'}>
+            <MainContainer align="center" alignVertical="center" page="sub">
               {!visibleTranscript && (
                 <DropShadow
                   style={{
@@ -249,13 +247,13 @@ const AudioScreen: AppScreen<'Audio'> = ({navigation}) => {
                 style={{
                   marginBottom: 32,
                 }}>
-                <Text textVariant={'bigHeader'} align={'center'}>
+                <Text align="center" textVariant="bigHeader">
                   {audioFile.name}
                 </Text>
                 <Text
-                  textVariant={'textSmall'}
-                  colorVariant={'gray'}
-                  align={'center'}>
+                  align="center"
+                  colorVariant="gray"
+                  textVariant="textSmall">
                   {/*Úroveň 1 • Bojujte s depresí*/}
                 </Text>
               </View>
@@ -277,21 +275,21 @@ const AudioScreen: AppScreen<'Audio'> = ({navigation}) => {
 
               <View>
                 <AudioControls
-                  isPlaying={audioPlaying}
-                  disablePrevButton={!audioFile.previous}
                   disableNextButton={!audioFile.next}
-                  onPressPrev={() =>
-                    audioFile.previous &&
-                    navigation.navigate('Audio', {id: audioFile.previous})
-                  }
+                  disablePrevButton={!audioFile.previous}
+                  isPlaying={audioPlaying}
                   onPressNext={() =>
                     audioFile.next &&
                     navigation.navigate('Audio', {id: audioFile.next})
                   }
                   onPressPlay={() => togglePlay()} //setAudioPlaying(!audioPlaying)}
+                  onPressPrev={() =>
+                    audioFile.previous &&
+                    navigation.navigate('Audio', {id: audioFile.previous})
+                  }
                 />
 
-                {audioFile?.transcript && (
+                {audioFile.transcript && (
                   <View>
                     <TouchableOpacity
                       style={{
@@ -311,16 +309,16 @@ const AudioScreen: AppScreen<'Audio'> = ({navigation}) => {
           </MainContainerWrapper>
         </GradientBackground>
 
-        {visibleTranscript && !!audioFile?.transcript && (
+        {visibleTranscript && !!audioFile.transcript && (
           <Modal
             close={() => setVisibleTranscript(!visibleTranscript)}
             onRequestClose={() => setVisibleTranscript(!visibleTranscript)}>
             <ScrollView>
-              <Text textVariant={'bigHeader'} align={'center'}>
+              <Text align="center" textVariant="bigHeader">
                 {audioFile.name}
               </Text>
               <HTML
-                source={{html: audioFile?.transcript}}
+                source={{html: audioFile.transcript}}
                 tagsStyles={{
                   ...styles,
                 }}

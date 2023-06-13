@@ -1,6 +1,8 @@
 import React from 'react';
-import S from './styles';
+
 import Icon from '../../../assets/icon-plus.svg';
+
+import S from './styles';
 
 type BoxAdd = {
   onPress: () => void;

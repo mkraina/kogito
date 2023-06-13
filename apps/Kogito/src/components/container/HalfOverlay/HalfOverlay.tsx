@@ -1,10 +1,12 @@
 import React from 'react';
-import {ContainerInner, StyledModal, OutsideWrap} from './styles';
-import ReactNative, {
+import type ReactNative from 'react-native';
+import {
   KeyboardAvoidingView,
+  Platform,
   TouchableWithoutFeedback,
 } from 'react-native';
-import {Platform} from 'react-native';
+
+import {ContainerInner, OutsideWrap, StyledModal} from './styles';
 
 type HalfOverlayProps = {
   close: () => void | undefined;
@@ -18,12 +20,12 @@ const HalfOverlay: React.FC<HalfOverlayProps> = ({children, ...rest}) => {
       </TouchableWithoutFeedback>
 
       <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         style={{
           flexDirection: 'row',
           justifyContent: 'space-around',
           alignItems: 'flex-end',
-        }}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+        }}>
         <ContainerInner>{children}</ContainerInner>
       </KeyboardAvoidingView>
     </StyledModal>

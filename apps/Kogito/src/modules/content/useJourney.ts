@@ -1,5 +1,6 @@
 import {gql, useQuery} from '@apollo/client';
-import {
+
+import type {
   JourneyQuery,
   JourneyQueryVariables,
 } from '../../../gql/__generated__/graphql';

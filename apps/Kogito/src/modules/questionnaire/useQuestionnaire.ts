@@ -1,7 +1,9 @@
-import {useQuestionnaireDetail} from './useQuestionnaireDetail';
 import {useEffect, useState} from 'react';
+
+import type {Question, UserAnswer} from '../../../gql/__generated__/graphql';
+
+import {useQuestionnaireDetail} from './useQuestionnaireDetail';
 import {useUpdateQuestionnaire} from './useUpdateQuestionnaire';
-import {Question, UserAnswer} from '../../../gql/__generated__/graphql';
 
 export const useQuestionnaire = (id: string) => {
   const {questionnaire} = useQuestionnaireDetail(id);
@@ -38,7 +40,7 @@ export const useQuestionnaire = (id: string) => {
       setHavePrevious(index > 0);
       setHaveNext(questions.length >= index);
 
-      if (actualQuestion && userAnswers) {
+      if (actualQuestion) {
         const haveAnswer = userAnswers.find(
           answer => answer.questionId === actualQuestion.id,
         );

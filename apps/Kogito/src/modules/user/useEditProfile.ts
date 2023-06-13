@@ -1,5 +1,6 @@
 import {gql, useMutation} from '@apollo/client';
-import {
+
+import type {
   EditProfileMutation,
   EditProfileMutationVariables,
 } from '../../../gql/__generated__/graphql';

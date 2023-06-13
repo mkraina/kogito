@@ -1,7 +1,9 @@
 import React from 'react';
-import {Container, ScrollViewInner, Link, Text, Border} from './styles';
-import {ScrollView, ViewProps} from 'react-native';
+import type {ViewProps} from 'react-native';
+import {ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+
+import {Border, Container, Link, ScrollViewInner, Text} from './styles';
 
 type ContainerProps = ViewProps & {
   isActive?: boolean;

@@ -1,11 +1,12 @@
 import React from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
-import {useContent} from '../modules/content/useContent';
-import MainContainerWrapper from '../components/container/MainContainerWrapper';
+
 import MainContainer from '../components/container/MainContainer/MainContainer';
+import MainContainerWrapper from '../components/container/MainContainerWrapper';
 import MainHeader from '../components/container/MainHeader/MainHeader';
-import Text from '../components/primitives/Text';
 import ArticleListBox from '../components/primitives/ArticleListBox';
+import Text from '../components/primitives/Text';
+import {useContent} from '../modules/content/useContent';
 import type {AppScreen} from '../navigation/Navigation';
 
 const StoriesListScreen: AppScreen<'StoriesList'> = ({navigation}) => {
@@ -16,22 +17,23 @@ const StoriesListScreen: AppScreen<'StoriesList'> = ({navigation}) => {
       <MainContainerWrapper>
         <MainHeader />
         <ScrollView>
-          <MainContainer page={'dashboard'} color={'white'}>
-            <MainContainer page={'subWithoutFooter'}>
+          <MainContainer color="white" page="dashboard">
+            <MainContainer page="subWithoutFooter">
               <Text
-                textVariant={'headerSub'}
                 style={{
                   marginTop: -40,
-                }}>
+                }}
+                textVariant="headerSub">
                 Příběhy
               </Text>
-              {stories?.map(story => (
+              {stories.map(story => (
                 <ArticleListBox
+                  key={story.id}
+                  buttonText={story.videoLink ? 'Přehrát' : 'Přečíst'}
+                  title={story.title}
                   onPress={() =>
                     navigation.navigate('StoryDetail', {id: story.id})
                   }
-                  title={story.title}
-                  buttonText={story.videoLink ? 'Přehrát' : 'Přečíst'}
                 />
               ))}
             </MainContainer>
